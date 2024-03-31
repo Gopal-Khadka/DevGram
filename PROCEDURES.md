@@ -13,3 +13,5 @@ Since there are gonna be routes in our project because there are multiple sectio
 ## Building Auth Page
 
 In this section, we will build our authentication page from scratch using Authentication page that looks similar to the Instagram but with our twist of flavor. We just included a random image for now. The login form will be placed on the right side of the image in the next section.
+
+## Building Authentication Form
