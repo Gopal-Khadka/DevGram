@@ -9,3 +9,7 @@ Since we are using Chakra UI and the app is using dark mode, it is essential to 
 ## Configuring Routes
 
 Since there are gonna be routes in our project because there are multiple sections in the website, we will configure and setup our routes now which will be updated and modified later on.
+
+## Building Auth Page
+
+In this section, we will build our authentication page from scratch using Authentication page that looks similar to the Instagram but with our twist of flavor. We just included a random image for now. The login form will be placed on the right side of the image in the next section.
