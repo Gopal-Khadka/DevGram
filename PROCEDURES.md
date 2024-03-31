@@ -15,3 +15,5 @@ Since there are gonna be routes in our project because there are multiple sectio
 In this section, we will build our authentication page from scratch using Authentication page that looks similar to the Instagram but with our twist of flavor. We just included a random image for now. The login form will be placed on the right side of the image in the next section.
 
 ## Building Authentication Form
+
+Simple form like `Instagram` is made with two login providers: `Google` and `GitHub` . This way, users can login through their github and google profiles. Actual authentication feature will be implemented through `Firebase` authentication.
