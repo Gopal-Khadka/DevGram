@@ -17,3 +17,7 @@ In this section, we will build our authentication page from scratch using Authen
 ## Building Authentication Form
 
 Simple form like `Instagram` is made with two login providers: `Google` and `GitHub` . This way, users can login through their github and google profiles. Actual authentication feature will be implemented through `Firebase` authentication.
+
+## Building SideBar Logo Section
+
+First we will build sidebar logo item. The logo item will differ based on the screen size of the viewer. If the device is medium or above, textual logo will be used and for base devices, Icon logo will be used.
