@@ -1,6 +1,7 @@
-import { Link } from "@chakra-ui/react";
+import { Link, Image } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
-import { InstagramLogo, InstagramMobileLogo } from "../../assets/constants";
+import logo from "/images/logo.png";
+import { FaDev } from "react-icons/fa";
 
 const SideBarLogo = () => {
   return (
@@ -11,7 +12,7 @@ const SideBarLogo = () => {
         cursor="pointer"
         display={{ base: "none", md: "block" }}
       >
-        <InstagramLogo />
+        <Image src={logo} w={40} />
       </Link>
       <Link
         as={RouterLink}
@@ -23,7 +24,7 @@ const SideBarLogo = () => {
           bg: "whiteAlpha.200",
         }}
       >
-        <InstagramMobileLogo />
+        <FaDev size={24} />
       </Link>
     </>
   );
