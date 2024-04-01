@@ -21,3 +21,7 @@ Simple form like `Instagram` is made with two login providers: `Google` and `Git
 ## Building SideBar Logo Section
 
 First we will build sidebar logo item. The logo item will differ based on the screen size of the viewer. If the device is medium or above, textual logo will be used and for base devices, Icon logo will be used.
+
+## Building SideBar Items
+
+Each item in the sidebar contains a relevant icon and a text that describes the section. In the base mobile devices, the text will be hidden and only icon will be shown. The tooltip with section label will be shown when hovered in the mobile devices.

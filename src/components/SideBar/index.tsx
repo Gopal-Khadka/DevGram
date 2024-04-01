@@ -1,5 +1,6 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import SideBarLogo from "./SideBarLogo";
+import SideBarItems from "./SideBarItems";
 
 const index = () => (
   <Box
@@ -12,7 +13,17 @@ const index = () => (
     left={0}
     px={{ base: 2, md: 4 }}
   >
-    <SideBarLogo />
+    <Flex
+      direction="column"
+      gap={10}
+      w="full"
+      h="full"
+      pl={2}
+      alignItems="center"
+    >
+      <SideBarLogo />
+      <SideBarItems />
+    </Flex>
   </Box>
 );
 

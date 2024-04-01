@@ -1,10 +1,10 @@
-import { Flex, Link } from "@chakra-ui/react";
+import { Link } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 import { InstagramLogo, InstagramMobileLogo } from "../../assets/constants";
 
 const SideBarLogo = () => {
   return (
-    <Flex direction="column" gap={10} w="full" h="full" pl={2}>
+    <>
       <Link
         as={RouterLink}
         to="/"
@@ -22,11 +22,10 @@ const SideBarLogo = () => {
         _hover={{
           bg: "whiteAlpha.200",
         }}
-        w={10}
       >
         <InstagramMobileLogo />
       </Link>
-    </Flex>
+    </>
   );
 };
 
