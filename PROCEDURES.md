@@ -25,3 +25,7 @@ First we will build sidebar logo item. The logo item will differ based on the sc
 ## Building SideBar Items
 
 Each item in the sidebar contains a relevant icon and a text that describes the section. In the base mobile devices, the text will be hidden and only icon will be shown. The tooltip with section label will be shown when hovered in the mobile devices.
+
+## Adding the LogOut Button
+
+The logout button will be added similar to sections-button. Clicking the button will take us back to the authentication page.

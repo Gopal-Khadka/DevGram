@@ -7,6 +7,7 @@ import {
   MessagesLogo,
 } from "../../assets/constants";
 import { AiFillHome } from "react-icons/ai";
+import LogOut from "./LogOut";
 
 const sideBarItems = [
   { icon: <AiFillHome size={25} />, text: "Home", link: "/" },
@@ -19,7 +20,7 @@ const sideBarItems = [
       <Avatar size={"sm"} name="Gopal Khadka" src="/images/profilepic.png" />
     ),
     text: "Profile",
-    link: "/gopal-khadka",
+    link: "/gopal",
   },
 ];
 
@@ -53,6 +54,7 @@ const SideBarItems = () => {
           </Tooltip>
         );
       })}
+      <LogOut />
     </Flex>
   );
 };
