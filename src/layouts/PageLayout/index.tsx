@@ -10,10 +10,10 @@ const index = ({ children }: Props) => {
   const { pathname } = useLocation();
   return (
     <Flex>
-      <Box w={{ base: "70px", md: "240px" }}>
+      <Box w={{ base: "70px", md: "200px" }}>
         {pathname !== "/auth" && <SideBar />}
       </Box>
-      <Box flex={1} w={{ base: "calc(100%-70px)", md: "calc(100%-240px)" }}>
+      <Box flex={1} w={{ base: "calc(100%-70px)", md: "calc(100%-200px)" }}>
         {children}
       </Box>
     </Flex>

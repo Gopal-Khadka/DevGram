@@ -29,3 +29,7 @@ Each item in the sidebar contains a relevant icon and a text that describes the 
 ## Adding the LogOut Button
 
 The logout button will be added similar to sections-button. Clicking the button will take us back to the authentication page.
+
+## Create Feeds and Suggested Developers Section
+
+The area for displaying feed posts and suggested users section is decided. The basic layout is defined. The suggested user section is on the very right with well defined max-width of 300px. The feeds section is on the middle of the page.
