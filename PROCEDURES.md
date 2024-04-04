@@ -33,3 +33,7 @@ The logout button will be added similar to sections-button. Clicking the button 
 ## Create Feeds and Suggested Developers Section
 
 The area for displaying feed posts and suggested users section is decided. The basic layout is defined. The suggested user section is on the very right with well defined max-width of 300px. The feeds section is on the middle of the page.
+
+## Design Feeds
+
+Feeds section is designed to look similar to the Instagram UI. The changes will be made acccordingly as per the website's requirement. It is necessary for the feed to be responsive for each kind of the devices
