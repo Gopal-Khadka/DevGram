@@ -37,3 +37,7 @@ The area for displaying feed posts and suggested users section is decided. The b
 ## Design Feeds
 
 Feeds section is designed to look similar to the Instagram UI. The changes will be made acccordingly as per the website's requirement. It is necessary for the feed to be responsive for each kind of the devices
+
+## Handle Like And Comments
+
+Once the layout is created, we need to handle the like event. The state needs to be defined for like's state i.e whether you have liked the post or not. Similarly, the comments also needs to be handled in the later module

@@ -1,9 +1,13 @@
 import { Box, Image } from "@chakra-ui/react";
 
-const PostBody = () => {
+interface Props {
+  image: string;
+}
+
+const PostBody = ({ image }: Props) => {
   return (
     <Box>
-      <Image src="/images/img1.png" borderRadius={10} />
+      <Image src={image} borderRadius={10} />
     </Box>
   );
 };
