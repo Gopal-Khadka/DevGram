@@ -31,7 +31,7 @@ For more details about the project, installation instructions, and contribution 
 
 ## Get Involved 🤝
 
-We welcome contributions from the developer community. If you'd like to contribute to DevGram, please check out our [contribution guidelines](https://github.com/Gopal-Khadka/DevGram/blob/main/CONTRIBUTING.md) and submit a pull request. Let's build an amazing platform for developers together!
+We welcome contributions from the developer community. If you'd like to contribute to DevGram, please check out our [contribution guidelines](https://github.com/Gopal-Khadka/DevGram/blob/master/CONTRIBUTING.md) and submit a pull request. Let's build an amazing platform for developers together!
 
 ## Contact Us 📧
 
