@@ -7,7 +7,13 @@ interface Props {
 const PostBody = ({ image }: Props) => {
   return (
     <Box>
-      <Image src={image} borderRadius={10} />
+      <Image
+        src={image}
+        borderRadius={10}
+        maxHeight="500px"
+        w="full"
+        objectFit="cover"
+      />
     </Box>
   );
 };
