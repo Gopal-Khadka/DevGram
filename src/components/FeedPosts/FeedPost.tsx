@@ -24,7 +24,7 @@ const FeedPost = ({ avatar, username, image }: Props) => {
       {isLoading ? (
         <SkeletonFeed />
       ) : (
-        <VStack mb={12} fontSize={{ base: 12, md: 13.5, lg: 15 }}>
+        <VStack mb={12} fontSize={{ base: 13.5, md: 15, lg: 17 }}>
           <PostHeader avatar={avatar} username={username} />
           <PostBody image={image} />
           <PostFooter />

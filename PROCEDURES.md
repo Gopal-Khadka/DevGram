@@ -45,3 +45,7 @@ Once the layout is created, we need to handle the like event. The state needs to
 ## Adding skeleton for the posts
 
 During the fetching of the data from the server, we need to capture the attention of the user. So, using skeleton as by many big tech social medias , we will be using the skeleton to show that the content is loading. For now, we are gonna create a delay for fetching data using `setTimeout()` function.
+
+## Adding suggested users section
+
+We add the suggested users section on the right side of the homepage. The random users are selected from database to be shown unlike the users suggested by algorithms as in Instagram.
