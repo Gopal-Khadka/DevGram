@@ -1,4 +1,4 @@
-import { Avatar, Flex, Button, HStack, Text } from "@chakra-ui/react";
+import { Avatar, Flex, Button, HStack, Text, Stack } from "@chakra-ui/react";
 
 const ProfileHeader = () => {
   return (
@@ -18,12 +18,14 @@ const ProfileHeader = () => {
         p={1}
       />
       <Flex direction="column" gap={2}>
-        <HStack gap="10">
-          <Text fontWeight="bold">gopu-ghopu</Text>
+        <Stack direction={{ base: "column", sm: "row" }} columnGap={10}>
+          <Text fontWeight="bold" alignSelf={"center"}>
+            gopu-ghopu
+          </Text>
           <Button colorScheme="gray" fontSize={{ base: 12, sm: 14, lg: 17 }}>
             Edit Profile
           </Button>
-        </HStack>
+        </Stack>
         <HStack justifyContent="space-between" alignItems="center">
           <Flex>
             <Text mr={1} fontWeight="bold">
