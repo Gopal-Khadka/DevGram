@@ -53,3 +53,5 @@ We add the suggested users section on the right side of the homepage. The random
 ## Designing Profile Page Header
 
 The header for profile page is designed where the user `avatar`, `posts` , `followers` and `following` will be shown along with the user bio
+
+## Designing Profile Page Tabs

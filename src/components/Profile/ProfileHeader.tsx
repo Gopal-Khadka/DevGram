@@ -5,48 +5,49 @@ const ProfileHeader = () => {
     <Flex
       gap={5}
       justifyContent="center"
+      alignItems="center"
       py={5}
       my={3}
-      w={{ base: "full", md: "80%", lg: "60%" }}
+      direction={{ base: "column", sm: "row" }}
     >
       <Avatar
-        size={{ base: "lg", md: "xl", lg: "2xl" }}
+        size={{ base: "xl", lg: "2xl" }}
         name="Gopal Khadka"
         src="/images/img2.png"
+        border="2px solid gray"
+        p={1}
       />
       <Flex direction="column" gap={2}>
         <HStack gap="10">
           <Text fontWeight="bold">gopu-ghopu</Text>
-          <Button colorScheme="gray" fontSize={{ base: 13, md: 14, lg: 16 }}>
+          <Button colorScheme="gray" fontSize={{ base: 12, sm: 14, lg: 17 }}>
             Edit Profile
           </Button>
         </HStack>
         <HStack justifyContent="space-between" alignItems="center">
           <Flex>
-            <Text mr={2} fontWeight="bold">
+            <Text mr={1} fontWeight="bold">
               4
             </Text>
             Posts
           </Flex>
           <Flex>
-            <Text mr={2} fontWeight="bold">
+            <Text mr={1} fontWeight="bold">
               149
             </Text>
             Followers
           </Flex>
           <Flex>
-            <Text mr={2} fontWeight="bold">
+            <Text mr={1} fontWeight="bold">
               46
             </Text>
             Following
           </Flex>
         </HStack>
         <Text fontWeight="bold"> I am a developer</Text>
-        <Text noOfLines={[1, 2]}>
+        <Text noOfLines={[2, 3]}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores
-          earum, quos incidunt quia itaque aut magni magnam dignissimos deleniti
-          repudiandae accusamus! Hic doloribus, quis ipsum asperiores obcaecati
-          tempora eligendi quidem?
+          earum, quos
         </Text>
       </Flex>
     </Flex>
