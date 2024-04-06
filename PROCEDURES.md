@@ -55,3 +55,9 @@ We add the suggested users section on the right side of the homepage. The random
 The header for profile page is designed where the user `avatar`, `posts` , `followers` and `following` will be shown along with the user bio
 
 ## Designing Profile Page Tabs
+
+The Profile Page Tab is designed similar to the Instagram page. The tab switch functionality is still not implemented. The Posts are placed underneath the tab switches. On hover of the post, no of comments and likes are shown. The modal featue will be implemented in the next section.
+
+## Designing the Post Modals
+
+When any pic is clicked, the modal of the clicked picture and the related comments need to be shown to the user. The modal can be implemented using `ChakraUI`.
