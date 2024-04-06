@@ -13,7 +13,7 @@ const PostComment = ({ username, image, comment, time }: Props) => {
       <VStack gap={1}>
         <HStack>
           <Text fontWeight="bold">{username}</Text>
-          <Text>{comment}</Text>
+          <Text noOfLines={2}>{comment}</Text>
         </HStack>
         <Text color="gray.500" alignSelf="flex-start">
           {time} ago

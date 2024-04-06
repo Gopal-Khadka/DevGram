@@ -16,10 +16,13 @@ import {
 
 import { FaHeart, FaComment, FaTrash } from "react-icons/fa";
 import PostComment from "./PostComment";
+import PostFooter from "../FeedPosts/PostFooter";
 
 interface Props {
   img: string;
 }
+
+const commentsList = [1, 2, 3, 4, 5, 6, 7, 8];
 
 const ProfilePost = ({ img }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -63,19 +66,21 @@ const ProfilePost = ({ img }: Props) => {
         onClose={onClose}
         isCentered
         closeOnEsc
-        size={{ base: "sm", lg: "2xl" }}
+        size={{ md: "xl", lg: "4xl" }}
       >
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton />
           <ModalBody p={5} bg="#1a202c" borderRadius={8}>
-            <Flex gap={6} w={{ base: "90%", sm: "70%", md: "full" }}>
-              <Box overflow="hidden" flex={1.5} borderRadius={5}>
+            <Flex gap={6}>
+              <Box overflow="hidden" flex={1.5}>
                 <Image
                   src={img}
                   alt="profile post"
+                  w="full"
                   objectFit="cover"
-                  height="500px"
+                  h="full"
+                  borderRadius={5}
                 />
               </Box>
               <Flex direction="column" gap={3} flex={1}>
@@ -84,26 +89,20 @@ const ProfilePost = ({ img }: Props) => {
                   <Text fontWeight={"bold"}>gopu-gophu </Text>
                   <FaTrash />
                 </HStack>
-                <VStack gap={2}>
-                  <PostComment
-                    comment="Nice picture"
-                    image={img}
-                    time="12h"
-                    username="lexiloria"
-                  />
-                  <PostComment
-                    comment="Nice"
-                    image={img}
-                    time="12h"
-                    username="lexiloria"
-                  />
-                  <PostComment
-                    comment="Nice"
-                    image={img}
-                    time="12h"
-                    username="lexiloria"
-                  />
+                <VStack gap={2} overflow="auto" maxH="300px">
+                  {commentsList.map((comment) => (
+                    <PostComment
+                      key={comment}
+                      comment="Nice picture"
+                      image={img}
+                      time="12h"
+                      username="@amenza"
+                    />
+                  ))}
                 </VStack>
+                <Flex mt="auto">
+                  <PostFooter />
+                </Flex>
               </Flex>
             </Flex>
           </ModalBody>

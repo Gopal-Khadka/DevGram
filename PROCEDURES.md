@@ -61,3 +61,7 @@ The Profile Page Tab is designed similar to the Instagram page. The tab switch f
 ## Designing the Post Modals
 
 When any pic is clicked, the modal of the clicked picture and the related comments need to be shown to the user. The modal can be implemented using `ChakraUI`.
+
+## Designing the Modal Footer
+
+The `postfooter` component is reused as footer for the modal footer.

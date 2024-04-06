@@ -13,7 +13,7 @@ const ProfileHeader = () => {
       <Avatar
         size={{ base: "xl", lg: "2xl" }}
         name="Gopal Khadka"
-        src="/images/img2.png"
+        src="/images/profilepic.png"
         border="2px solid gray"
         p={1}
       />
