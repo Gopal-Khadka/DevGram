@@ -49,3 +49,7 @@ During the fetching of the data from the server, we need to capture the attentio
 ## Adding suggested users section
 
 We add the suggested users section on the right side of the homepage. The random users are selected from database to be shown unlike the users suggested by algorithms as in Instagram.
+
+## Designing Profile Page Header
+
+The header for profile page is designed where the user `avatar`, `posts` , `followers` and `following` will be shown along with the user bio

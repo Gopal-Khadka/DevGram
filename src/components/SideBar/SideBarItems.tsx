@@ -20,7 +20,7 @@ const sideBarItems = [
       <Avatar size={"sm"} name="Gopal Khadka" src="/images/profilepic.png" />
     ),
     text: "Profile",
-    link: "/gopal",
+    link: "/user/gopal",
   },
 ];
 
