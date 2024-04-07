@@ -65,3 +65,31 @@ When any pic is clicked, the modal of the clicked picture and the related commen
 ## Designing the Modal Footer
 
 The `postfooter` component is reused as footer for the modal footer.
+
+## Configuring the FireBase
+
+Since the half portion of our UI is done, it is time to handle some backend and database. Instead of using local device as backend server and database server, we are going to use `Firebase` which is BaaS(BackEnd as a Service) for this project. It provides us with database for user info, storage for storing images and authentication for user validation.
+
+### Step 1 : Login Into Google Firebase
+
+### Step 2 : Open console and create a new project
+
+### Step 3 : Install firebase library
+
+Simply run given command to install `firebase` and `react-firebase-hooks` (for firebase authentication) :
+
+```bash
+npm i firebase react-firebase-hooks
+```
+
+### Step 4 : Create a new web app inside your project
+
+### Step 5 : Copy the firebase SDK configuration
+
+### Step 6 : Setup firebase setup file in src folder
+
+### Step 7: Setup Google, Email and GitHub Authentication for your project
+
+### Step 8: Setup Firebase Storage for your project
+
+### Step 9: Setup Firestore DB for your project
