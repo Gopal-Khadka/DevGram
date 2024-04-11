@@ -133,3 +133,7 @@ If the user has slow internet connection during authentication, the page is gonn
 
 While signing up the user, we check if the email and password already exists. What if the user tries to take the existing username? There are no checks for that. Not yet !  
 We are going to run a query on the `firestore` DB tp check if the username already exists. If it does, a toast will be thrown to the user.Else, user will be logged in.
+
+### Handling Email Login Functionality
+
+Similar to signing up, the login functionality is implemented with ease.
