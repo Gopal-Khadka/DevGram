@@ -1,17 +1,18 @@
 import { Button, Input } from "@chakra-ui/react";
 import { useState } from "react";
-
-interface SignUpDetails {
-  fullName: string;
-  username: string;
-  email: string;
-  password: string;
-}
+import UseSignUp, {
+  SignUpDetails,
+} from "../../hooks/UseSignUpWithEmailAndPass";
 
 const SignUp = () => {
-  const [signUpDetails, setSignUpDetails] = useState<SignUpDetails>(
-    {} as SignUpDetails
-  );
+  const [signUpDetails, setSignUpDetails] = useState<SignUpDetails>({
+    email: "",
+    fullName: "",
+    password: "",
+    username: "",
+  });
+
+  const { loading, signUp } = UseSignUp(signUpDetails);
   return (
     <>
       <Input
@@ -54,7 +55,13 @@ const SignUp = () => {
           setSignUpDetails({ ...signUpDetails, password: e.target.value })
         }
       />
-      <Button width="full" colorScheme="blue">
+
+      <Button
+        width="full"
+        colorScheme="blue"
+        isLoading={loading}
+        onClick={signUp}
+      >
         SignUp
       </Button>
     </>

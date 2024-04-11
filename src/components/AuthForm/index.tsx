@@ -1,13 +1,4 @@
-import {
-  Alert,
-  AlertDescription,
-  AlertIcon,
-  AlertTitle,
-  Box,
-  Flex,
-  Image,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Flex, Image, VStack } from "@chakra-ui/react";
 import logo from "/images/logo.png";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
@@ -19,18 +10,8 @@ import Login from "./Login";
 
 const Index = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const [error, setError] = useState(false);
-
   return (
     <>
-      {error && (
-        <Alert status="error" borderRadius={10}>
-          <AlertIcon />
-          <AlertTitle>Login Error.</AlertTitle>
-          <AlertDescription>Check Login details properly</AlertDescription>
-        </Alert>
-      )}
-
       {/* First box */}
       <Box>
         <VStack
