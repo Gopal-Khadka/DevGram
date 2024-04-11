@@ -1,4 +1,5 @@
 # DevGram 🚀
+
 ## Social media for developers by developers
 
 DevGram is a social media platform designed exclusively for developers. It provides a space for developers to connect, share their coding journey, and collaborate on projects. Built using React, ChakraUI and FireBase(Baas). DevGram offers a seamless user experience with features tailored for the developer community.
@@ -24,6 +25,34 @@ DevGram is a social media platform designed exclusively for developers. It provi
 - [ ] Implement search functionality to enable users to find specific users, posts, or hashtags.
 - [ ] Incorporate an events and meetups section to keep users informed about upcoming coding events.
 - [ ] Develop the direct messaging feature for private communication between users.
+
+## Installation Guide 🈸
+
+- First, you need to install `Node.js` in your local machine.
+- Then, you need to clone this repository in your folder of choice:
+
+  ```bash
+  git clone https://github.com/Gopal-Khadka/DevGram.git
+  ```
+
+- Change the working directory to `DevGram` folder.
+- Install all the necessary node packages and dependencies
+
+  ```bash
+  npm i
+  ```
+
+- There are two ways of starting this website:
+  1. Start only on your local machine
+  ```bash
+  npm run dev
+  ```
+  2. Start on your local network
+  ```bash
+  npm run expose
+  ```
+- You will be provided the url on the console when server starts. eg: `http://localhost:5173/`
+- Click on the link and use website on your browser.
 
 ## More Information ℹ️
 
