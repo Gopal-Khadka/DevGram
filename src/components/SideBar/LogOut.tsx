@@ -2,6 +2,7 @@ import { Tooltip, Box, Flex, Button } from "@chakra-ui/react";
 import { BiLogOut } from "react-icons/bi";
 import useLogOut from "../../hooks/useLogOut";
 import useShowToast from "../../hooks/useShowToast";
+import { Navigate } from "react-router-dom";
 
 const LogOut = () => {
   const { handleLogOut, isLoggingOut, error } = useLogOut();
@@ -17,7 +18,10 @@ const LogOut = () => {
         display={{ base: "block", md: "none" }}
       >
         <Flex
-          onClick={handleLogOut}
+          onClick={() => {
+            handleLogOut();
+            <Navigate to="/auth" />;
+          }}
           alignItems="center"
           gap={4}
           p={2}

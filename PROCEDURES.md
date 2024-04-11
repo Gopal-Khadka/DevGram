@@ -120,3 +120,7 @@ After the user is logged out, we need to restrict the homepage access to the use
 - For the profile page, anyone can access it but only user can interact on it.
 - If the user is not signed in, the sidebar will not be shown.
 - Alternatively, a NavBar needs to be shown to prompt user to login or sign up.
+
+### Showing NavBar to Signed Out Users
+
+When the user is logged out on the profile page, they are prompted to sign up or log in. The form will be shown based on which button they click. If they click signup page, they will be shown SignUp Form. Else, they will be shown the Login Form.

@@ -7,9 +7,12 @@ import ProviderLogin from "./ProviderLogin";
 import OrSection from "./OrSection";
 import SignUp from "./SignUp";
 import Login from "./Login";
+import useAuthStore from "../../store/authStore";
 
 const AuthForm = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(
+    useAuthStore((state) => state.isLogin)
+  );
   return (
     <>
       {/* First box */}

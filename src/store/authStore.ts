@@ -5,6 +5,8 @@ interface AuthState {
   login: <T>(user: T) => void;
   logout: () => void;
   setUser: <T>(user: T) => void;
+  isLogin: boolean;
+  setIsLogin: (isLogin: boolean) => void;
 }
 
 const useAuthStore = create<AuthState>()((set) => {
@@ -13,6 +15,8 @@ const useAuthStore = create<AuthState>()((set) => {
     login: <T>(user: T) => set({ user }),
     logout: () => set({ user: null }),
     setUser: <T>(user: T) => set({ user }),
+    isLogin: true,
+    setIsLogin: (isLogin: boolean) => set({ isLogin }),
   };
 });
 
