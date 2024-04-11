@@ -2,6 +2,7 @@ import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { fireAuth, firestore } from "../firebase/firebase";
 import { doc, setDoc } from "firebase/firestore";
 import useShowToast from "./useShowToast";
+import useAuthStore from "../store/authStore";
 
 export interface SignUpDetails {
   fullName: string;
@@ -14,6 +15,7 @@ function UseSignUp(inputs: SignUpDetails) {
   const [createUserWithEmailAndPassword, , loading, error] =
     useCreateUserWithEmailAndPassword(fireAuth);
   const showToast = useShowToast();
+  const loginUser = useAuthStore((state) => state.login);
 
   const signUp = async () => {
     const emptyInput =
@@ -58,6 +60,7 @@ function UseSignUp(inputs: SignUpDetails) {
         // adding it to firestore Db in collections "users"
         await setDoc(doc(firestore, "users", newUser.user.uid), userDoc);
         localStorage.setItem("user-info", JSON.stringify(userDoc));
+        loginUser<typeof userDoc>(userDoc); // using authStore with zustand
         return showToast({
           title: "Success",
           description: "New account created successfully.",

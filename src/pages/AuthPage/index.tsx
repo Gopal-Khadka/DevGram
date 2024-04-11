@@ -9,7 +9,7 @@ const index = () => {
       <Container maxWidth={"container.md"}>
         <Flex justifyContent="center" alignItems="center" gap={5}>
           <Box display={{ base: "none", md: "block" }}>
-            <Image src={authImage} height="515px" borderRadius={10} />
+            <Image src={authImage} height="full" borderRadius={10} />
           </Box>
           <VStack>
             <AuthForm />

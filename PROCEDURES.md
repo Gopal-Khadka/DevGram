@@ -105,3 +105,18 @@ Gooogle Firebase Authentication service is used to handle the signup functionali
 ### Logout Functionality from SideBar
 
 Similar to implemenatation of user login functionality, we can implement user signout functionality using `react-firebase-hooks`. If user is logged out, the data from local storage will be removed.
+
+### Restricting User After LogOut
+
+After the user is logged out, we need to restrict the homepage access to the user. For this, we need global state management library `zustand`. First, we need to install it.
+
+```bash
+    npm i zustand
+```
+
+- We use zustand `create()` function to create a global store which store the `user` related state and can be accessed from anywhere. When the user uses website, it is checked if the the local storage item has `user-info` item.If it exists, `user` state is assigned that value.
+- Whenever the user is signed in, `user` state in zustand will be assigned a `User` object and when user logs out, `user` state becomes null. Similar is done for the `login` and `logout` functionality.
+- If there is, the user is redirected to homepage even if the user tries to open the authentication page. Otherwise, the user is redirected to authentication page even if the user tries to open the home page.
+- For the profile page, anyone can access it but only user can interact on it.
+- If the user is not signed in, the sidebar will not be shown.
+- Alternatively, a NavBar needs to be shown to prompt user to login or sign up.

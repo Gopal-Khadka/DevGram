@@ -8,7 +8,7 @@ import OrSection from "./OrSection";
 import SignUp from "./SignUp";
 import Login from "./Login";
 
-const Index = () => {
+const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
   return (
     <>
@@ -56,4 +56,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default AuthForm;
