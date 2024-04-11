@@ -124,3 +124,7 @@ After the user is logged out, we need to restrict the homepage access to the use
 ### Showing NavBar to Signed Out Users
 
 When the user is logged out on the profile page, they are prompted to sign up or log in. The form will be shown based on which button they click. If they click signup page, they will be shown SignUp Form. Else, they will be shown the Login Form.
+
+### Adding Page Spinner
+
+If the user has slow internet connection during authentication, the page is gonna show a spinner while the authentication is being done in the background.
