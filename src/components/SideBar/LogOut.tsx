@@ -1,8 +1,11 @@
-import { Link, Tooltip, Text, Box } from "@chakra-ui/react";
-import { Link as RouterLink } from "react-router-dom";
+import { Tooltip, Box, Flex, Button } from "@chakra-ui/react";
 import { BiLogOut } from "react-icons/bi";
+import useLogOut from "../../hooks/useLogOut";
+import useShowToast from "../../hooks/useShowToast";
 
 const LogOut = () => {
+  const { handleLogOut, isLoggingOut, error } = useLogOut();
+  const showToast = useShowToast();
   return (
     <Box cursor="pointer" mt={10}>
       <Tooltip
@@ -13,10 +16,8 @@ const LogOut = () => {
         openDelay={500}
         display={{ base: "block", md: "none" }}
       >
-        <Link
-          as={RouterLink}
-          to={"/auth"}
-          display="flex"
+        <Flex
+          onClick={handleLogOut}
           alignItems="center"
           gap={4}
           p={2}
@@ -24,9 +25,22 @@ const LogOut = () => {
           _hover={{ bg: "whiteAlpha.400" }}
         >
           {<BiLogOut size={25} />}
-          <Text display={{ base: "none", md: "flex" }}>LogOut</Text>
-        </Link>
+          <Button
+            display={{ base: "none", md: "flex" }}
+            variant="ghost"
+            _hover={{ bg: "transparent" }}
+            isLoading={isLoggingOut}
+          >
+            LogOut
+          </Button>
+        </Flex>
       </Tooltip>
+      {error &&
+        showToast({
+          title: "Error",
+          description: error.message,
+          status: "error",
+        })}
     </Box>
   );
 };
