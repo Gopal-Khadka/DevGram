@@ -3,10 +3,11 @@ import HomePage from "./pages/HomePage";
 import AuthPage from "./pages/AuthPage";
 import ProfilePage from "./pages/Profile";
 import PageLayout from "./layouts/PageLayout";
-import useAuthStore from "./store/authStore";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { fireAuth } from "./firebase/firebase";
 
 const App = () => {
-  const authUser = useAuthStore((state) => state.user);
+  const [authUser] = useAuthState(fireAuth); // know if the user is logged in or not from the firebase
   return (
     <PageLayout>
       <Routes>
