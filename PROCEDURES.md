@@ -93,3 +93,7 @@ npm i firebase react-firebase-hooks
 ### Step 8: Setup Firebase Storage for your project
 
 ### Step 9: Setup Firestore DB for your project
+
+## Implementing Login and SignUp Functionality
+
+We are creating separate components for both login and signup form. This way, we can handle their functionality separately.
