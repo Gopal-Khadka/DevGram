@@ -3,9 +3,11 @@ import { BiLogOut } from "react-icons/bi";
 import useLogOut from "../../hooks/useLogOut";
 import useShowToast from "../../hooks/useShowToast";
 import { Navigate } from "react-router-dom";
+import useAuthStore from "../../store/authStore";
 
 const LogOut = () => {
   const { handleLogOut, isLoggingOut, error } = useLogOut();
+  const setIsLogin = useAuthStore((state) => state.setIsLogin);
   const showToast = useShowToast();
   return (
     <Box cursor="pointer" mt={10}>
@@ -20,6 +22,7 @@ const LogOut = () => {
         <Flex
           onClick={() => {
             handleLogOut();
+            setIsLogin(true);
             <Navigate to="/auth" />;
           }}
           alignItems="center"

@@ -13,7 +13,7 @@ const PageLayout = ({ children }: Props) => {
   // SideBar should only be visible if the user is logged and it is not auth page
   // Even if the user is logged out, they should be able to see others profile but not react to it
   const { pathname } = useLocation();
-  const [user, loading, error] = useAuthState(fireAuth);
+  const [user, loading] = useAuthState(fireAuth);
   const canRenderSidebar = pathname !== "/auth" && user;
   const canRenderNavBar = !loading && !user && pathname !== "/auth";
 
