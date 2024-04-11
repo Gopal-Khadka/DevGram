@@ -97,3 +97,7 @@ npm i firebase react-firebase-hooks
 ## Implementing Login and SignUp Functionality
 
 We are creating separate components for both login and signup form. This way, we can handle their functionality separately.
+
+### SignUp With Email
+
+Gooogle Firebase Authentication service is used to handle the signup functionality by email. When the user tries to create a new account, it verifies if the user is actually new i.e the user doesn't already exist on the database. After verification, the user is created and the necessary details are stored on `firestore` and localStorage.
