@@ -1,6 +1,8 @@
 import { Avatar, Flex, Button, HStack, Text, Stack } from "@chakra-ui/react";
+import useAuthStore from "../../store/authStore";
 
 const ProfileHeader = () => {
+  const authUser = useAuthStore((state) => state.user);
   return (
     <Flex
       gap={5}
@@ -11,17 +13,20 @@ const ProfileHeader = () => {
       direction={{ base: "column", sm: "row" }}
     >
       <Avatar
+        objectFit="cover"
         size={{ base: "xl", lg: "2xl" }}
-        name="Gopal Khadka"
-        src="/images/profilepic.png"
+        name={authUser.fullName}
+        src={authUser.profilePicUrl}
+        title={authUser.fullName}
         border="2px solid gray"
         p={1}
       />
       <Flex direction="column" gap={2}>
         <Stack direction={{ base: "column", sm: "row" }} columnGap={10}>
           <Text fontWeight="bold" alignSelf={"center"}>
-            gopu-ghopu
+            {authUser.username}
           </Text>
+
           <Button colorScheme="gray" fontSize={{ base: 12, sm: 14, lg: 17 }}>
             Edit Profile
           </Button>
@@ -46,7 +51,7 @@ const ProfileHeader = () => {
             Following
           </Flex>
         </HStack>
-        <Text fontWeight="bold"> I am a developer</Text>
+        <Text fontWeight="bold"> {authUser.bio}</Text>
         <Text noOfLines={[2, 3]}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores
           earum, quos
