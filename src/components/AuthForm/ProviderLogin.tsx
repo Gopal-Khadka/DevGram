@@ -32,25 +32,28 @@ const ProviderLogin = ({ icon, provider, prefix }: Props) => {
           description: error.message,
           status: "error",
         });
-      }
-
-      if (newUser) {
-        const usersRef = doc(firestore, "users", newUser?.user.uid);
+      } else if (newUser) {
+        const usersRef = doc(firestore, "users", newUser.user.uid);
         const userSnap = await getDoc(usersRef);
-        if (userSnap.data.length > 0) return;
-        const userDoc = {
-          uid: newUser.user.uid,
-          email: newUser.user.email,
-          username: newUser.user.email?.split("@")[0],
-          fullName: newUser.user.displayName,
-          bio: "",
-          profilePicUrl: newUser.user.photoURL,
-          followers: [],
-          following: [],
-          posts: [],
-          createdAt: Date.now(),
-        };
-
+        let userDoc;
+        if (userSnap.exists()) {
+          // users has already logged in before
+          userDoc = userSnap.data();
+        } else {
+          // users has  loged in for first time
+          userDoc = {
+            uid: newUser?.user.uid,
+            email: newUser?.user.email,
+            username: newUser?.user.email?.split("@")[0],
+            fullName: newUser?.user.displayName,
+            bio: "",
+            profilePicUrl: newUser?.user.photoURL,
+            followers: [],
+            following: [],
+            posts: [],
+            createdAt: Date.now(),
+          };
+        }
         // adding it to firestore Db in collections "users"
         await setDoc(doc(firestore, "users", newUser.user.uid), userDoc);
         localStorage.setItem("user-info", JSON.stringify(userDoc));

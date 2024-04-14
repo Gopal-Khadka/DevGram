@@ -139,3 +139,12 @@ We are going to run a query on the `firestore` DB tp check if the username alrea
 Similar to signing up, the login functionality is implemented with ease.
 
 ### Handling Google and GitHub Authentication
+
+Google and GitHub authentication is handled based on the chosen provider. The one thing to be considered here is:
+
+- If user is logged in for the first time
+  For this, new user document need to be created in the firestore `users` collection.
+- Otherwise, user has logged in before.
+  For this, no new user document need to be created in the firestore `users` collection.
+
+For checking the condition, a query on the firestore is run to check if the user already exists . If user is already created before, the retrieved data can be stored in the local storage and authStore in zustand similar to signIn and LogIn functionality.
