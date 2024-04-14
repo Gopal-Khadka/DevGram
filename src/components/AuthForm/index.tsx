@@ -13,6 +13,7 @@ const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(
     useAuthStore((state) => state.isLogin)
   );
+  const prefix = isLogin ? "Log in" : "Sign Up";
   return (
     <>
       {/* First box */}
@@ -30,8 +31,8 @@ const AuthForm = () => {
           {/* OR Section */}
           <OrSection />
           {/* Login With Providers */}
-          <ProviderLogin icon={FcGoogle} provider="Google" />
-          <ProviderLogin icon={FaGithub} provider="GitHub" />
+          <ProviderLogin icon={FcGoogle} provider="Google" prefix={prefix} />
+          <ProviderLogin icon={FaGithub} provider="GitHub" prefix={prefix} />
         </VStack>
       </Box>
       {/* Second box */}

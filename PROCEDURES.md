@@ -137,3 +137,5 @@ We are going to run a query on the `firestore` DB tp check if the username alrea
 ### Handling Email Login Functionality
 
 Similar to signing up, the login functionality is implemented with ease.
+
+### Handling Google and GitHub Authentication
