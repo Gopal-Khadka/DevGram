@@ -148,3 +148,7 @@ Google and GitHub authentication is handled based on the chosen provider. The on
   For this, no new user document need to be created in the firestore `users` collection.
 
 For checking the condition, a query on the firestore is run to check if the user already exists . If user is already created before, the retrieved data can be stored in the local storage and authStore in zustand similar to signIn and LogIn functionality.
+
+### Fetching Profile Header Data
+
+If the user is found on the `users` collection, their information will be shown to the user instead of random values and data. `ProfileStore` is created using zustand to keep track of the searched user or selected user profile. This way, our media app is going to be dynamic and reactive in nature.

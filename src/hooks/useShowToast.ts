@@ -1,4 +1,5 @@
 import { useToast } from "@chakra-ui/react";
+import { useCallback } from "react";
 
 interface Props {
   title: string;
@@ -8,15 +9,20 @@ interface Props {
 
 const useShowToast = () => {
   const toast = useToast();
-  const showToast = ({ title, description, status }: Props) => {
-    return toast({
-      title,
-      status,
-      description,
-      isClosable: true,
-      duration: 3000,
-    });
-  };
+
+  // useCallBack prevents infinite loop by caching the function
+  const showToast = useCallback(
+    ({ title, description, status }: Props) => {
+      return toast({
+        title,
+        status,
+        description,
+        isClosable: true,
+        duration: 3000,
+      });
+    },
+    [toast]
+  );
   return showToast;
 };
 
