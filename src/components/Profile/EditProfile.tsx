@@ -157,7 +157,8 @@ const EditProfile = ({ isOpen, onClose }: Props) => {
                     w="full"
                     _hover={{ bg: "blue.500" }}
                     onClick={handleEditProfile}
-                    disabled={isUpdating}
+                    isDisabled={isUpdating}
+                    
                   >
                     Submit
                   </Button>

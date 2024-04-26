@@ -4,10 +4,12 @@ import useShowToast from "./useShowToast";
 import { fireStorage, firestore } from "../firebase/firebase";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { doc, updateDoc } from "firebase/firestore";
+import useUserProfileStore from "../store/userProfileStore";
 
 const useEditProfile = () => {
   const [isUpdating, setIsUpdating] = useState(false);
   const { user: authUser, setUser: setAuthUser } = useAuthStore();
+  const { setUserProfile } = useUserProfileStore();
   const showToast = useShowToast();
 
   const editProfile = async (inputs: any, selectedFile: any) => {
@@ -35,6 +37,7 @@ const useEditProfile = () => {
       await updateDoc(userDocRef, updatedUser); // update the user data
       localStorage.setItem("user-info", JSON.stringify(updatedUser));
       setAuthUser(updatedUser); // update user store state
+      setUserProfile(updatedUser); // update profile store state
       showToast({
         title: "Success",
         description: "Profile updated successfully",
@@ -47,7 +50,7 @@ const useEditProfile = () => {
         status: "error",
       });
     }
-    // setIsUpdating(false);
+    setIsUpdating(false);
   };
 
   return { isUpdating, editProfile };
