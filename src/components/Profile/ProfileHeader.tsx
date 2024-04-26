@@ -60,7 +60,7 @@ const ProfileHeader = () => {
                 {...buttonProps}
                 colorScheme="blue"
                 onClick={handleFollowUser}
-                isDisabled={isUpdating}
+                isLoading={isUpdating}
               >
                 {isFollowing ? "Unfollow" : "Follow"}
               </Button>

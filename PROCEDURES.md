@@ -173,3 +173,7 @@ If the user is found on the `users` collection, their information will be shown 
    This can be done by uploading image to the firestore storage and updating the user data using `uid` in `users` collection. Localstorage and `userProfile` state store from zustand needs to be updated for new user data. The changes made on the server needs to be reflected on UI dependent on the server data.
 
 ### Follow/ Unfollow Functionality
+
+- Let's first understand the logic here. Here are two parties being involved in this: `follower` and `followed`. So the changes need to be reflected on both parties on both server and UI. First, we need to check if the user is already being followed or not. This can be done either by querying in firestore DB or checking the required data value from `authUser` state from `AuthStore`.
+- After it is checked, we need to decide if the userId(uid) needs to be added or removed from the respective user collection. After the updation is done in the server, we need to requery the firebase DB for updated `authUser` and `userToFollowOrUnfollow` which can be then stored in `authUser` and `userProfile` store state to reflect the changes in UI.
+- You can also update `localStorage` for consistency.
