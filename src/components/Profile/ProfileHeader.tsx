@@ -10,9 +10,9 @@ import {
 import useUserProfileStore from "../../store/userProfileStore";
 import useAuthStore from "../../store/authStore";
 import EditProfile from "./EditProfile";
+import useFollowUser from "../../hooks/useFollowUser";
 
 const buttonProps = {
-  colorScheme: "gray",
   fontSize: { base: 12, sm: 14, lg: 17 },
 };
 
@@ -20,6 +20,9 @@ const ProfileHeader = () => {
   const { userProfile } = useUserProfileStore();
   const { user: authUser } = useAuthStore();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { handleFollowUser, isFollowing, isUpdating } = useFollowUser(
+    userProfile.uid
+  );
   const visitingOwnProfileAndAuth =
     authUser && authUser.username == userProfile.username;
 
@@ -49,11 +52,18 @@ const ProfileHeader = () => {
 
           {authUser &&
             (visitingOwnProfileAndAuth ? (
-              <Button {...buttonProps} onClick={onOpen}>
+              <Button {...buttonProps} onClick={onOpen} colorScheme="gray">
                 Edit Profile
               </Button>
             ) : (
-              <Button {...buttonProps}>Follow</Button>
+              <Button
+                {...buttonProps}
+                colorScheme="blue"
+                onClick={handleFollowUser}
+                isDisabled={isUpdating}
+              >
+                {isFollowing ? "Unfollow" : "Follow"}
+              </Button>
             ))}
         </Stack>
         <HStack justifyContent="space-between" alignItems="center">

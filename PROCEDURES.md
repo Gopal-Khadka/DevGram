@@ -171,3 +171,5 @@ If the user is found on the `users` collection, their information will be shown 
 3. Changing the data on the firestore  
    All the changes that we made till now will only be reflected on the user interface but not on the actual server. Now we need to handle this by creating a hook.  
    This can be done by uploading image to the firestore storage and updating the user data using `uid` in `users` collection. Localstorage and `userProfile` state store from zustand needs to be updated for new user data. The changes made on the server needs to be reflected on UI dependent on the server data.
+
+### Follow/ Unfollow Functionality
