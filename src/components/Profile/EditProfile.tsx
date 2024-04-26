@@ -18,6 +18,7 @@ import {
 import { useRef, useState } from "react";
 import useAuthStore from "../../store/authStore";
 import usePreviewImg from "../../hooks/usePreviewImg";
+import useEditProfile from "../../hooks/useEditProfile";
 interface Props {
   isOpen: boolean;
   onClose: () => void;
@@ -31,7 +32,8 @@ interface ProfileInputs {
 const EditProfile = ({ isOpen, onClose }: Props) => {
   const { user: authUser } = useAuthStore();
   const profileRef = useRef<HTMLInputElement>(null);
-  const { selectedFile, handleImageChange } = usePreviewImg();
+  const { selectedFile, setSelectedFile, handleImageChange } = usePreviewImg();
+  const { editProfile, isUpdating } = useEditProfile();
 
   const [inputs, setInputs] = useState<ProfileInputs>({
     fullName: authUser.fullName,
@@ -39,8 +41,10 @@ const EditProfile = ({ isOpen, onClose }: Props) => {
     bio: authUser.bio,
   });
 
-  const handleEditProfile = () => {
-    console.log(inputs);
+  const handleEditProfile = async () => {
+    await editProfile(inputs, selectedFile);
+    setSelectedFile(null); // reset the image value
+    onClose(); // finally close the modal on submit
   };
 
   return (
@@ -74,7 +78,7 @@ const EditProfile = ({ isOpen, onClose }: Props) => {
                     <Center>
                       <Avatar
                         size="xl"
-                        src={selectedFile || authUser.profilePicUrl }
+                        src={selectedFile || authUser.profilePicUrl}
                         border={"2px solid white "}
                       />
                     </Center>
@@ -153,6 +157,7 @@ const EditProfile = ({ isOpen, onClose }: Props) => {
                     w="full"
                     _hover={{ bg: "blue.500" }}
                     onClick={handleEditProfile}
+                    disabled={isUpdating}
                   >
                     Submit
                   </Button>

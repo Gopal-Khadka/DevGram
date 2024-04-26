@@ -168,3 +168,6 @@ If the user is found on the `users` collection, their information will be shown 
    A profile edit modal should open up when the button is clicked which enables the user to edit their profile pic, username, full name and bio. On top of that, we can enable user to change their email and password using hooks defined in `react-firebase-hooks` library.
 2. Edit Profile picture  
    The profile picture must be of type `image`. It can be jpeg, png or any other image formats. Its size must be less than 2MB which I think is enough for a profile picture. When button is clicked, a file select dialog is opened which urges user to upload the new image for profile picture.
+3. Changing the data on the firestore  
+   All the changes that we made till now will only be reflected on the user interface but not on the actual server. Now we need to handle this by creating a hook.  
+   This can be done by uploading image to the firestore storage and updating the user data using `uid` in `users` collection. Localstorage and `userProfile` state store from zustand needs to be updated for new user data. The changes made on the server needs to be reflected on UI dependent on the server data.

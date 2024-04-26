@@ -49,7 +49,9 @@ const ProfileHeader = () => {
 
           {authUser &&
             (visitingOwnProfileAndAuth ? (
-              <Button {...buttonProps} onClick={onOpen}>Edit Profile</Button>
+              <Button {...buttonProps} onClick={onOpen}>
+                Edit Profile
+              </Button>
             ) : (
               <Button {...buttonProps}>Follow</Button>
             ))}
@@ -81,7 +83,7 @@ const ProfileHeader = () => {
         </Text>
       </Flex>
 
-      {isOpen && <EditProfile  isOpen={isOpen} onClose={onClose}/>}
+      {isOpen && <EditProfile isOpen={isOpen} onClose={onClose} />}
     </Flex>
   );
 };
