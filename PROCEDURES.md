@@ -152,3 +152,17 @@ For checking the condition, a query on the firestore is run to check if the user
 ### Fetching Profile Header Data
 
 If the user is found on the `users` collection, their information will be shown to the user instead of random values and data. `ProfileStore` is created using zustand to keep track of the searched user or selected user profile. This way, our media app is going to be dynamic and reactive in nature.
+
+### Edit User Profile
+
+- Case I : User not logged in
+  No button will be shown to the user in the header section.
+- Case II: User logged and visiting own profile
+  If logged user is visiting own profile, button `Edit Profile` is shown.
+- Case III: User logged in but visiting somebody else's profile
+  If logged user is visiting somebody else's profile, button `Follow / Unfollow` is shown.
+
+### Edit Profile Functionality
+
+1. Create a modal behaviour on the click of the `Edit Profile` button.  
+   A profile edit modal should open up when the button is clicked which enables the user to edit their profile pic, username, full name and bio. On top of that, we can enable user to change their email and password using hooks defined in `react-firebase-hooks` library.

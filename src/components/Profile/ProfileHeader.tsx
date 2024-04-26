@@ -1,8 +1,28 @@
-import { Avatar, Flex, Button, HStack, Text, Stack } from "@chakra-ui/react";
+import {
+  Avatar,
+  Flex,
+  Button,
+  HStack,
+  Text,
+  Stack,
+  useDisclosure,
+} from "@chakra-ui/react";
 import useUserProfileStore from "../../store/userProfileStore";
+import useAuthStore from "../../store/authStore";
+import EditProfile from "./EditProfile";
+
+const buttonProps = {
+  colorScheme: "gray",
+  fontSize: { base: 12, sm: 14, lg: 17 },
+};
 
 const ProfileHeader = () => {
   const { userProfile } = useUserProfileStore();
+  const { user: authUser } = useAuthStore();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const visitingOwnProfileAndAuth =
+    authUser && authUser.username == userProfile.username;
+
   return (
     <Flex
       gap={5}
@@ -27,14 +47,17 @@ const ProfileHeader = () => {
             {userProfile.username}
           </Text>
 
-          <Button colorScheme="gray" fontSize={{ base: 12, sm: 14, lg: 17 }}>
-            Edit Profile
-          </Button>
+          {authUser &&
+            (visitingOwnProfileAndAuth ? (
+              <Button {...buttonProps} onClick={onOpen}>Edit Profile</Button>
+            ) : (
+              <Button {...buttonProps}>Follow</Button>
+            ))}
         </Stack>
         <HStack justifyContent="space-between" alignItems="center">
           <Flex>
             <Text mr={1} fontWeight="bold">
-            {userProfile.posts.length}
+              {userProfile.posts.length}
             </Text>
             Posts
           </Flex>
@@ -46,7 +69,7 @@ const ProfileHeader = () => {
           </Flex>
           <Flex>
             <Text mr={1} fontWeight="bold">
-            {userProfile.following.length}
+              {userProfile.following.length}
             </Text>
             Following
           </Flex>
@@ -57,6 +80,8 @@ const ProfileHeader = () => {
           earum, quos
         </Text>
       </Flex>
+
+      {isOpen && <EditProfile  isOpen={isOpen} onClose={onClose}/>}
     </Flex>
   );
 };
