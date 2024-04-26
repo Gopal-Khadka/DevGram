@@ -166,3 +166,5 @@ If the user is found on the `users` collection, their information will be shown 
 
 1. Create a modal behaviour on the click of the `Edit Profile` button.  
    A profile edit modal should open up when the button is clicked which enables the user to edit their profile pic, username, full name and bio. On top of that, we can enable user to change their email and password using hooks defined in `react-firebase-hooks` library.
+2. Edit Profile picture  
+   The profile picture must be of type `image`. It can be jpeg, png or any other image formats. Its size must be less than 2MB which I think is enough for a profile picture. When button is clicked, a file select dialog is opened which urges user to upload the new image for profile picture.
