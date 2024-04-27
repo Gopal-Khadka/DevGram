@@ -57,7 +57,7 @@ const ProviderLogin = ({ icon, provider, prefix }: Props) => {
         // adding it to firestore Db in collections "users"
         await setDoc(doc(firestore, "users", newUser.user.uid), userDoc);
         localStorage.setItem("user-info", JSON.stringify(userDoc));
-        loginUser<typeof userDoc>(userDoc); // using authStore with zustand
+        loginUser(userDoc); // using authStore with zustand
         return showToast({
           title: "Success",
           description: "Successful LogIn With " + provider,

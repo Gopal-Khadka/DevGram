@@ -6,10 +6,12 @@ const index = () => {
   const { isLoading, suggestedUsers } = useGetSuggestedUsers();
   return (
     <VStack>
-      <Flex justifyContent="space-between" w="full">
-        <Text color={"gray"}>Suggested for you</Text>
-        <Link> See All</Link>
-      </Flex>
+      {suggestedUsers.length > 0 && (
+        <Flex justifyContent="space-between" w="full">
+          <Text color={"gray"}>Suggested for you</Text>
+          <Link> See All</Link>
+        </Flex>
+      )}
       {isLoading && <Spinner size={"xl"} />}
       {suggestedUsers.map((user) => (
         <SuggestedUser user={user} key={user.id} />
