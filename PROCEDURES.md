@@ -191,3 +191,4 @@ For home section, we can get synamic suggested user from the database rather tha
 - Create Post Create Modal on the `Create Post` section click on the `SideBar`.
 - Update the post data both on server and UI.
   Changes need to be reflected on `users` and `posts` collection on the firestore database. Similarly, `userProfile` and `postStore` need to be updated accordingly which immediately reflect changes on the UI.
+- The posts sections now use the queried data from the firestore to show the relevant data to the user.

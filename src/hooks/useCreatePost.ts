@@ -3,7 +3,6 @@ import useShowToast from "./useShowToast";
 import useAuthStore from "../store/authStore";
 import usePostStore, { Post } from "../store/postStore";
 import useUserProfileStore from "../store/userProfileStore";
-import { useLocation } from "react-router-dom";
 import {
   addDoc,
   arrayUnion,
@@ -20,9 +19,9 @@ const useCreatePost = () => {
   const authUser = useAuthStore((state) => state.user);
   const { createPost } = usePostStore();
   const { addPost } = useUserProfileStore();
-  const { pathname } = useLocation();
 
   const handleCreatePost = async (selectedFile: string, caption: string) => {
+    if (isLoading) return;
     if (!selectedFile)
       return showToast({
         title: "Error",

@@ -13,15 +13,16 @@ export interface Post {
 interface PostState {
   posts: Post[];
   createPost: (post: Post) => void;
+  setPosts: (posts: Post[]) => void;
 }
 
 const usePostStore = create<PostState>()((set) => ({
   posts: [],
   createPost: (post) => set((state) => ({ posts: [post, ...state.posts] })),
+  setPosts: (posts) => set({ posts }),
 
   // deletePost
   // addComment
-  // setPosts
 }));
 
 export default usePostStore;

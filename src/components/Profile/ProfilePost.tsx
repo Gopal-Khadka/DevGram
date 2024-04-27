@@ -1,6 +1,7 @@
 import {
   Avatar,
   Box,
+  Button,
   Flex,
   HStack,
   Image,
@@ -17,15 +18,19 @@ import {
 import { FaHeart, FaComment, FaTrash } from "react-icons/fa";
 import PostComment from "./PostComment";
 import PostFooter from "../FeedPosts/PostFooter";
+import { Post } from "../../store/postStore";
+import useUserProfileStore from "../../store/userProfileStore";
+import useAuthStore from "../../store/authStore";
 
 interface Props {
-  img: string;
+  post: Post;
 }
 
-const commentsList = [1, 2, 3, 4, 5, 6, 7, 8];
-
-const ProfilePost = ({ img }: Props) => {
+const ProfilePost = ({ post }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { userProfile } = useUserProfileStore();
+  const { user: authUser } = useAuthStore();
+
   return (
     <>
       <Box
@@ -50,14 +55,20 @@ const ProfilePost = ({ img }: Props) => {
         >
           <HStack>
             <FaHeart />
-            <Text>{Math.floor(Math.random() * 100)}</Text>
+            <Text>{post.likes.length}</Text>
           </HStack>
           <HStack>
             <FaComment />
-            <Text>{Math.floor(Math.random() * 100)}</Text>
+            <Text>{post.comments.length}</Text>
           </HStack>
         </Flex>
-        <Image src={img} height={"300px"} objectFit={"cover"} w="full" />
+        <Image
+          src={post.imageURL}
+          height={"300px"}
+          objectFit={"cover"}
+          w="full"
+          transform={"scale(1.3)"}
+        />
       </Box>
 
       <Modal
@@ -72,10 +83,10 @@ const ProfilePost = ({ img }: Props) => {
         <ModalContent>
           <ModalCloseButton />
           <ModalBody p={5} bg="#1a202c" borderRadius={8}>
-            <Flex gap={6}>
-              <Box overflow="hidden" flex={1.5}>
+            <Flex gap={6} maxH="90vh" minH="50vh">
+              <Box overflow="hidden" flex={1.5} maxH="600px">
                 <Image
-                  src={img}
+                  src={post.imageURL}
                   alt="profile post"
                   w="full"
                   objectFit="cover"
@@ -85,16 +96,30 @@ const ProfilePost = ({ img }: Props) => {
               </Box>
               <Flex direction="column" gap={3} flex={1}>
                 <HStack gap={5} borderBottom="1px solid gray" pb={2}>
-                  <Avatar src="/images/profilepic.png" />
-                  <Text fontWeight={"bold"}>gopu-gophu </Text>
-                  <FaTrash />
+                  <Avatar
+                    src={userProfile?.profilePicUrl}
+                    name={userProfile?.fullName}
+                    title={userProfile?.fullName}
+                  />
+                  <Text fontWeight={"bold"}>{userProfile?.username} </Text>
+                  {post.createdBy == authUser?.uid && (
+                    <Button
+                      size="sm"
+                      bg="transparent"
+                      _hover={{ bg: "whiteAlpha.300", color: "red.600" }}
+                      borderRadius={4}
+                      p={1}
+                    >
+                      <FaTrash />
+                    </Button>
+                  )}
                 </HStack>
                 <VStack gap={2} overflow="auto" maxH="300px">
-                  {commentsList.map((comment) => (
+                  {post.comments.map((comment, idx) => (
                     <PostComment
-                      key={comment}
-                      comment="Nice picture"
-                      image={img}
+                      key={idx}
+                      comment={comment}
+                      image={post.imageURL || ""}
                       time="12h"
                       username="@amenza"
                     />
