@@ -2,9 +2,7 @@ import { useState } from "react";
 import useShowToast from "./useShowToast";
 
 const usePreviewImg = () => {
-  const [selectedFile, setSelectedFile] = useState<string | null | ArrayBuffer>(
-    null
-  );
+  const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const showToast = useShowToast();
 
   const maxFileSizeInBytes = 2 * 1024 * 1024; // 2 MB
@@ -24,7 +22,7 @@ const usePreviewImg = () => {
       const reader = new FileReader();
 
       reader.onloadend = () => {
-        setSelectedFile(reader.result);
+        setSelectedFile(reader.result as string);
       };
 
       reader.readAsDataURL(file);

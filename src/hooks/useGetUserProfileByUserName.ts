@@ -3,6 +3,7 @@ import useShowToast from "./useShowToast";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { firestore } from "../firebase/firebase";
 import useUserProfileStore from "../store/userProfileStore";
+import { UserDoc } from "./UseSignUpWithEmailAndPass";
 
 const useGetUserProfileByUserName = (username: string) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -19,11 +20,10 @@ const useGetUserProfileByUserName = (username: string) => {
         );
         const querySnapshot = await getDocs(q);
         if (querySnapshot.empty) return setUserProfile(null);
-        let userDoc;
+
         querySnapshot.forEach((doc) => {
-          userDoc = doc.data();
+          setUserProfile(doc.data() as UserDoc);
         });
-        setUserProfile(userDoc);
       } catch (error: any) {
         showToast({
           title: "Error",

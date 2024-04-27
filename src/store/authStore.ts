@@ -1,10 +1,11 @@
 import { create } from "zustand";
+import { UserDoc } from "../hooks/UseSignUpWithEmailAndPass";
 
 interface AuthState {
-  user: any | null;
-  login: <T>(user: T) => void;
+  user: UserDoc | null;
+  login: (user: UserDoc) => void;
   logout: () => void;
-  setUser: <T>(user: T) => void;
+  setUser: (user: UserDoc) => void;
   isLogin: boolean;
   setIsLogin: (isLogin: boolean) => void;
 }
@@ -12,9 +13,9 @@ interface AuthState {
 const useAuthStore = create<AuthState>()((set) => {
   return {
     user: JSON.parse(localStorage.getItem("user-info") ?? "null"),
-    login: <T>(user: T) => set({ user }),
+    login: (user: UserDoc) => set({ user }),
     logout: () => set({ user: null }),
-    setUser: <T>(user: T) => set({ user }),
+    setUser: (user: UserDoc) => set({ user }),
     isLogin: true,
     setIsLogin: (isLogin: boolean) => set({ isLogin }),
   };

@@ -3,6 +3,7 @@ import useShowToast from "./useShowToast";
 import { fireAuth, firestore } from "../firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import useAuthStore from "../store/authStore";
+import { UserDoc } from "./UseSignUpWithEmailAndPass";
 
 export interface LoginDetails {
   email: string;
@@ -40,9 +41,9 @@ const useLogin = (inputs: LoginDetails) => {
         // adding it to firestore Db in collections "users"
         const docRef = doc(firestore, "users", existingUser.user.uid);
         const docSnap = await getDoc(docRef);
-        const userDoc = docSnap.data();
+        const userDoc = docSnap.data() as UserDoc;
         localStorage.setItem("user-info", JSON.stringify(userDoc));
-        loginUser<typeof userDoc>(userDoc);
+        loginUser(userDoc);
 
         showToast({
           title: "Success!",

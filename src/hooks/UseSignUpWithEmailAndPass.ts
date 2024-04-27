@@ -17,6 +17,18 @@ export interface SignUpDetails {
   email: string;
   password: string;
 }
+export interface UserDoc {
+  uid: string;
+  email: string;
+  username: string;
+  fullName: string;
+  bio: string;
+  profilePicUrl: string;
+  followers: string[];
+  following: string[];
+  posts: [];
+  createdAt: number;
+}
 
 function UseSignUp(inputs: SignUpDetails) {
   const [createUserWithEmailAndPassword, , loading, error] =
@@ -62,7 +74,7 @@ function UseSignUp(inputs: SignUpDetails) {
       // if user is new and doesn't exist
       if (newUser) {
         // creating firestore document object
-        const userDoc = {
+        const userDoc: UserDoc = {
           uid: newUser.user.uid,
           email: inputs.email,
           username: inputs.username,
@@ -77,7 +89,7 @@ function UseSignUp(inputs: SignUpDetails) {
         // adding it to firestore Db in collections "users"
         await setDoc(doc(firestore, "users", newUser.user.uid), userDoc);
         localStorage.setItem("user-info", JSON.stringify(userDoc));
-        loginUser<typeof userDoc>(userDoc); // using authStore with zustand
+        loginUser(userDoc); // using authStore with zustand
         return showToast({
           title: "Success",
           description: "New account created successfully.",

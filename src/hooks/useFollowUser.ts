@@ -13,6 +13,7 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
+import { UserDoc } from "./UseSignUpWithEmailAndPass";
 
 const useFollowUser = (uid: string) => {
   const [isUpdating, setIsUpdating] = useState(false);
@@ -21,21 +22,24 @@ const useFollowUser = (uid: string) => {
   const { setUserProfile } = useUserProfileStore();
   const showToast = useShowToast();
 
+  if (!authUser) return;
   /**
    *
    * @param uid user id i.e uniquely defined in "users" collection
    */
-  const queryUpdatedUser = async (uid: string) => {
-    let updatedUser;
+  const queryUpdatedUser = async (uid: string): Promise<UserDoc> => {
+    let updatedUser = {} as UserDoc;
     const q = query(collection(firestore, "users"), where("uid", "==", uid));
     const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => (updatedUser = doc.data()));
+    querySnapshot.forEach((doc) => {
+      updatedUser = doc.data() as UserDoc;
+    });
     return updatedUser;
   };
 
   useEffect(() => {
     // check if the given uid is included in your logged in account following's list
-    setIsFollowing(authUser.following.includes(uid));
+    setIsFollowing(authUser?.following.includes(uid));
   }, [uid, authUser]);
 
   const handleFollowUser = async () => {
@@ -61,8 +65,10 @@ const useFollowUser = (uid: string) => {
       const updatedFollowedUser = await queryUpdatedUser(uid);
 
       // update the store states and local storage for change in UI
-      setAuthUser(updatedAuthUser);
-      setUserProfile(updatedFollowedUser);
+      if (updatedAuthUser && updatedFollowedUser) {
+        setAuthUser(updatedAuthUser);
+        setUserProfile(updatedFollowedUser);
+      }
       localStorage.setItem("user-info", JSON.stringify(updatedAuthUser));
 
       // change value based on if the authUser has followed or unfollowed the visited user
