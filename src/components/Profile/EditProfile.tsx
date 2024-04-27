@@ -34,7 +34,7 @@ const EditProfile = ({ isOpen, onClose }: Props) => {
   const profileRef = useRef<HTMLInputElement>(null);
   const { selectedFile, setSelectedFile, handleImageChange } = usePreviewImg();
   const { editProfile, isUpdating } = useEditProfile();
-  
+
   if (!authUser) return;
   const [inputs, setInputs] = useState<ProfileInputs>({
     fullName: authUser.fullName,
@@ -158,7 +158,7 @@ const EditProfile = ({ isOpen, onClose }: Props) => {
                     w="full"
                     _hover={{ bg: "blue.500" }}
                     onClick={handleEditProfile}
-                    isDisabled={isUpdating}
+                    isLoading={isUpdating}
                   >
                     Submit
                   </Button>

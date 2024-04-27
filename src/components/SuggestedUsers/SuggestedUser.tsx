@@ -6,7 +6,7 @@ import useAuthStore from "../../store/authStore";
 
 interface Props {
   user: UserDoc;
-  setUser: (user: UserDoc) => void;
+  setUser?: (user: UserDoc) => void;
 }
 
 const SuggestedUser = ({ user, setUser }: Props) => {
@@ -16,12 +16,16 @@ const SuggestedUser = ({ user, setUser }: Props) => {
 
   const onFollowUser = async () => {
     await handleFollowUser();
-    setUser({
-      ...user,
-      followers: isFollowing
-        ? user.followers.filter((followerUID) => followerUID !== authUser?.uid)
-        : [...user.followers, authUser?.uid || ""],
-    });
+    if (setUser) {
+      setUser({
+        ...user,
+        followers: isFollowing
+          ? user.followers.filter(
+              (followerUID) => followerUID !== authUser?.uid
+            )
+          : [...user.followers, authUser?.uid || ""],
+      });
+    }
   };
   return (
     <HStack my={2} gap={6}>

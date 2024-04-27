@@ -181,3 +181,7 @@ If the user is found on the `users` collection, their information will be shown 
 ## Search Functionality
 
 When search section is clicked on the sidebar, it opens up a modal asking for a username. If user exists, it show a small component as like `Suggested user` which allows user to follow and unfollow the searched user. We can even open up the searched user profile.
+
+## Dynamic Suggested Users
+
+For home section, we can get synamic suggested user from the database rather than using the fixed user data. We will create a hook to do that for us. We will only suggest the users that we have not followed and we have limited no of the users to be suggested to be `3`.
