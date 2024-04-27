@@ -8,6 +8,7 @@ import { fireAuth, firestore } from "../../firebase/firebase";
 import useShowToast from "../../hooks/useShowToast";
 import useAuthStore from "../../store/authStore";
 import { setDoc, doc, getDoc } from "firebase/firestore";
+import { UserDoc } from "../../hooks/UseSignUpWithEmailAndPass";
 
 interface Props {
   icon: IconType;
@@ -35,19 +36,19 @@ const ProviderLogin = ({ icon, provider, prefix }: Props) => {
       } else if (newUser) {
         const usersRef = doc(firestore, "users", newUser.user.uid);
         const userSnap = await getDoc(usersRef);
-        let userDoc;
+        let userDoc: UserDoc;
         if (userSnap.exists()) {
           // users has already logged in before
-          userDoc = userSnap.data();
+          userDoc = userSnap.data() as UserDoc;
         } else {
           // users has  loged in for first time
           userDoc = {
             uid: newUser?.user.uid,
-            email: newUser?.user.email,
-            username: newUser?.user.email?.split("@")[0],
-            fullName: newUser?.user.displayName,
+            email: newUser?.user.email || "",
+            username: newUser?.user.email?.split("@")[0] || "",
+            fullName: newUser?.user.displayName || "",
             bio: "",
-            profilePicUrl: newUser?.user.photoURL,
+            profilePicUrl: newUser?.user.photoURL || "",
             followers: [],
             following: [],
             posts: [],
