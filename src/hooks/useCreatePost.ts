@@ -20,7 +20,7 @@ const useCreatePost = () => {
   const authUser = useAuthStore((state) => state.user);
   const { createPost } = usePostStore();
   const { addPost } = useUserProfileStore();
-//   const { pathname } = useLocation();
+  const { pathname } = useLocation();
 
   const handleCreatePost = async (selectedFile: string, caption: string) => {
     if (!selectedFile)
