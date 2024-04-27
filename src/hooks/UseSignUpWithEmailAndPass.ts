@@ -10,6 +10,7 @@ import {
 } from "firebase/firestore";
 import useShowToast from "./useShowToast";
 import useAuthStore from "../store/authStore";
+import { Post } from "../store/postStore";
 
 export interface SignUpDetails {
   fullName: string;
@@ -26,7 +27,7 @@ export interface UserDoc {
   profilePicUrl: string;
   followers: string[];
   following: string[];
-  posts: [];
+  posts: Post[];
   createdAt: number;
 }
 

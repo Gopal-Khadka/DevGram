@@ -185,3 +185,9 @@ When search section is clicked on the sidebar, it opens up a modal asking for a 
 ## Dynamic Suggested Users
 
 For home section, we can get synamic suggested user from the database rather than using the fixed user data. We will create a hook to do that for us. We will only suggest the users that we have not followed and we have limited no of the users to be suggested to be `3`.
+
+## Create Post Functionality
+
+- Create Post Create Modal on the `Create Post` section click on the `SideBar`.
+- Update the post data both on server and UI.
+  Changes need to be reflected on `users` and `posts` collection on the firestore database. Similarly, `userProfile` and `postStore` need to be updated accordingly which immediately reflect changes on the UI.
