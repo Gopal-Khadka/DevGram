@@ -1,4 +1,4 @@
-import SuggestedUser from "./SuggestedUser";
+// import SuggestedUser from "./SuggestedUser";
 import { VStack, Text, Link, Flex, Box } from "@chakra-ui/react";
 
 const index = () => {
@@ -8,7 +8,7 @@ const index = () => {
         <Text color={"gray"}>Suggested for you</Text>
         <Link> See All</Link>
       </Flex>
-      <SuggestedUser
+      {/* <SuggestedUser
         src="/images/img1.png"
         name="Sai Pallavi"
         followers="1669"
@@ -22,7 +22,7 @@ const index = () => {
         src="/images/img3.png"
         name="Marilyn Munroe"
         followers="689"
-      />
+      /> */}
       <Box>
         <Text>
           &copy; {new Date().getFullYear()} Built By

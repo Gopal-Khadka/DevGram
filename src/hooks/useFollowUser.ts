@@ -22,7 +22,6 @@ const useFollowUser = (uid: string) => {
   const { setUserProfile } = useUserProfileStore();
   const showToast = useShowToast();
 
-  if (!authUser) return;
   /**
    *
    * @param uid user id i.e uniquely defined in "users" collection
@@ -39,13 +38,13 @@ const useFollowUser = (uid: string) => {
 
   useEffect(() => {
     // check if the given uid is included in your logged in account following's list
-    setIsFollowing(authUser?.following.includes(uid));
+    setIsFollowing(authUser?.following.includes(uid) || false);
   }, [uid, authUser]);
 
   const handleFollowUser = async () => {
     setIsUpdating(true);
     try {
-      const authUserRef = doc(firestore, "users", authUser.uid);
+      const authUserRef = doc(firestore, "users", authUser?.uid || "");
       const userToFollowOrUnfollow = doc(firestore, "users", uid);
 
       // remove or add the uid on the following list of authUser based on "isFollowing"
@@ -56,12 +55,12 @@ const useFollowUser = (uid: string) => {
       // remove or add the uid on the followers list of another user based on "isFollowing"
       await updateDoc(userToFollowOrUnfollow, {
         followers: isFollowing
-          ? arrayRemove(authUser.uid)
-          : arrayUnion(authUser.uid),
+          ? arrayRemove(authUser?.uid)
+          : arrayUnion(authUser?.uid),
       });
 
       // query updated user data
-      const updatedAuthUser = await queryUpdatedUser(authUser.uid);
+      const updatedAuthUser = await queryUpdatedUser(authUser?.uid || "");
       const updatedFollowedUser = await queryUpdatedUser(uid);
 
       // update the store states and local storage for change in UI

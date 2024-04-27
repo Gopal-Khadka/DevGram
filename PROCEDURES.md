@@ -153,7 +153,7 @@ For checking the condition, a query on the firestore is run to check if the user
 
 If the user is found on the `users` collection, their information will be shown to the user instead of random values and data. `ProfileStore` is created using zustand to keep track of the searched user or selected user profile. This way, our media app is going to be dynamic and reactive in nature.
 
-### Edit User Profile
+## Edit User Profile
 
 - Case I : User not logged in
   No button will be shown to the user in the header section.
@@ -172,8 +172,12 @@ If the user is found on the `users` collection, their information will be shown 
    All the changes that we made till now will only be reflected on the user interface but not on the actual server. Now we need to handle this by creating a hook.  
    This can be done by uploading image to the firestore storage and updating the user data using `uid` in `users` collection. Localstorage and `userProfile` state store from zustand needs to be updated for new user data. The changes made on the server needs to be reflected on UI dependent on the server data.
 
-### Follow/ Unfollow Functionality
+## Follow/ Unfollow Functionality
 
 - Let's first understand the logic here. Here are two parties being involved in this: `follower` and `followed`. So the changes need to be reflected on both parties on both server and UI. First, we need to check if the user is already being followed or not. This can be done either by querying in firestore DB or checking the required data value from `authUser` state from `AuthStore`.
 - After it is checked, we need to decide if the userId(uid) needs to be added or removed from the respective user collection. After the updation is done in the server, we need to requery the firebase DB for updated `authUser` and `userToFollowOrUnfollow` which can be then stored in `authUser` and `userProfile` store state to reflect the changes in UI.
 - You can also update `localStorage` for consistency.
+
+## Search Functionality
+
+When search section is clicked on the sidebar, it opens up a modal asking for a username. If user exists, it show a small component as like `Suggested user` which allows user to follow and unfollow the searched user. We can even open up the searched user profile.

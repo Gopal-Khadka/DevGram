@@ -36,7 +36,7 @@ const useSearch = () => {
       setIsLoading(false);
     }
   };
-  return { user, isLoading, getUserProfile };
+  return { user, isLoading, getUserProfile, setUser };
 };
 
 export default useSearch;
