@@ -31,8 +31,6 @@ const PostFooter = ({ post }: Props) => {
   };
 
   const handleSubmitComment = async () => {
-    console.log(comment);
-
     handlePostComment(post.id || "", comment);
     setComment(" ");
   };
@@ -52,7 +50,7 @@ const PostFooter = ({ post }: Props) => {
         View all comments
       </Link>
       {authUser && (
-        <InputGroup>
+        <InputGroup paddingY={2}>
           <Input
             variant="flushed"
             onChange={(e) => setComment(e.target.value)}
@@ -64,6 +62,7 @@ const PostFooter = ({ post }: Props) => {
               cursor="pointer"
               onClick={handleSubmitComment}
               isLoading={isCommenting}
+              paddingX={8}
             >
               Post
             </Button>
