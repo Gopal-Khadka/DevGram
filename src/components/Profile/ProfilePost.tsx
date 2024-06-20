@@ -18,9 +18,14 @@ import {
 import { FaHeart, FaComment, FaTrash } from "react-icons/fa";
 import PostComment from "./PostComment";
 import PostFooter from "../FeedPosts/PostFooter";
-import { Post } from "../../store/postStore";
+import usePostStore, { Post } from "../../store/postStore";
 import useUserProfileStore from "../../store/userProfileStore";
 import useAuthStore from "../../store/authStore";
+import useShowToast from "../../hooks/useShowToast";
+import { deleteObject, ref } from "firebase/storage";
+import { fireStorage, firestore } from "../../firebase/firebase";
+import { arrayRemove, deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { useState } from "react";
 
 interface Props {
   post: Post;
@@ -30,6 +35,46 @@ const ProfilePost = ({ post }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { userProfile } = useUserProfileStore();
   const { user: authUser } = useAuthStore();
+  const showToast = useShowToast();
+  const [isDeleting, setIsDeleting] = useState(false);
+  const { deletePost } = usePostStore();
+  const deletePostFromProfile = useUserProfileStore(
+    (state) => state.deletePost
+  );
+
+  const handleDeletePost = async () => {
+    if (isDeleting) return;
+    setIsDeleting(true);
+    if (!window.confirm("Are you sure you want to delete this post?")) return;
+    try {
+      const imageRef = ref(fireStorage, `posts/${post?.id}`);
+      await deleteObject(imageRef);
+
+      const userRef = doc(firestore, "users", authUser?.uid || "");
+      console.log(userRef);
+      
+      await updateDoc(userRef, {
+        posts: arrayRemove(post?.id),
+      });
+      await deleteDoc(doc(firestore, "posts", post.id || ""));
+      
+
+      deletePost(post?.id || null);
+      deletePostFromProfile(post.id || "");
+      showToast({
+        title: "Success",
+        description: "Post deleted successfully",
+        status: "success",
+      });
+    } catch (error: any) {
+      showToast({
+        title: "Error",
+        description: error.message,
+        status: "error",
+      });
+    }
+    setIsDeleting(false);
+  };
 
   return (
     <>
@@ -109,6 +154,8 @@ const ProfilePost = ({ post }: Props) => {
                       _hover={{ bg: "whiteAlpha.300", color: "red.600" }}
                       borderRadius={4}
                       p={1}
+                      onClick={handleDeletePost}
+                      isLoading={isDeleting}
                     >
                       <FaTrash />
                     </Button>

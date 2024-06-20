@@ -184,7 +184,7 @@ When search section is clicked on the sidebar, it opens up a modal asking for a 
 
 ## Dynamic Suggested Users
 
-For home section, we can get synamic suggested user from the database rather than using the fixed user data. We will create a hook to do that for us. We will only suggest the users that we have not followed and we have limited no of the users to be suggested to be `3`.
+For home section, we can get dynamic suggested user from the database rather than using the fixed user data. We will create a hook to do that for us. We will only suggest the users that we have not followed and we have limited no of the users to be suggested to be `3`.
 
 ## Create Post Functionality
 
@@ -192,3 +192,7 @@ For home section, we can get synamic suggested user from the database rather tha
 - Update the post data both on server and UI.
   Changes need to be reflected on `users` and `posts` collection on the firestore database. Similarly, `userProfile` and `postStore` need to be updated accordingly which immediately reflect changes on the UI.
 - The posts sections now use the queried data from the firestore to show the relevant data to the user.
+
+## Delete post functionality
+- When the delete button is clicked on the post overlay, the id of the post is used to delete the post from the firebase database and storage.
+- Post are also deleted from the profile and the related values are also updated.

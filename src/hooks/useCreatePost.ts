@@ -47,7 +47,7 @@ const useCreatePost = () => {
       await uploadString(imageRef, selectedFile, "data_url");
 
       const downloadURL = await getDownloadURL(imageRef);
-      await updateDoc(postDocRef, { imageURL: downloadURL });
+      await updateDoc(postDocRef, { imageURL: downloadURL, id: postDocRef.id });
       newPost.imageURL = downloadURL;
 
       createPost(newPost);

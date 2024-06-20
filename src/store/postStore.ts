@@ -14,6 +14,7 @@ interface PostState {
   posts: Post[];
   createPost: (post: Post) => void;
   setPosts: (posts: Post[]) => void;
+  deletePost: (id: string | null) => void;
 }
 
 const usePostStore = create<PostState>()((set) => ({
@@ -21,7 +22,8 @@ const usePostStore = create<PostState>()((set) => ({
   createPost: (post) => set((state) => ({ posts: [post, ...state.posts] })),
   setPosts: (posts) => set({ posts }),
 
-  // deletePost
+  deletePost: (id) =>
+    set((state) => ({ posts: state.posts.filter((post) => post.id != id) })),
   // addComment
 }));
 

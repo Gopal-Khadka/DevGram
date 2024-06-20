@@ -5,6 +5,7 @@ interface ProfileState {
   userProfile: UserDoc | null;
   setUserProfile: (userProfile: UserDoc | null) => void;
   addPost: (post: Post) => void;
+  deletePost: (postId: string ) => void;
 }
 
 const useUserProfileStore = create<ProfileState>()((set) => ({
@@ -17,6 +18,15 @@ const useUserProfileStore = create<ProfileState>()((set) => ({
         userProfile: {
           ...(state.userProfile || ({} as UserDoc)),
           posts: [...(state.userProfile?.posts || ([] as Post[])), post],
+        },
+      };
+    }),
+  deletePost: (postId) =>
+    set((state) => {
+      return {
+        userProfile: {
+          ...(state.userProfile || ({} as UserDoc)),
+          posts: state.userProfile?.posts.filter((id)=> id !== postId) || ([] as Post[]),
         },
       };
     }),
