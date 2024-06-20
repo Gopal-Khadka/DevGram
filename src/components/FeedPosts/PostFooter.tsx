@@ -12,6 +12,7 @@ import { useState } from "react";
 import { FaRegHeart, FaRegComment, FaHeart } from "react-icons/fa";
 import { Post } from "../../store/postStore";
 import usePostComment from "../../hooks/usePostComment";
+import useAuthStore from "../../store/authStore";
 
 interface Props {
   post: Post;
@@ -22,6 +23,7 @@ const PostFooter = ({ post }: Props) => {
   const [noOfLikes, setNoOfLikes] = useState(1000);
   const { isCommenting, handlePostComment } = usePostComment();
   const [comment, setComment] = useState(" ");
+  const { user: authUser } = useAuthStore();
 
   const handleLike = () => {
     setIsLiked(!isLiked);
@@ -49,23 +51,25 @@ const PostFooter = ({ post }: Props) => {
       <Link as={Text} color="gray.500" _hover={{ textDecoration: "none" }}>
         View all comments
       </Link>
-      <InputGroup>
-        <Input
-          variant="flushed"
-          onChange={(e) => setComment(e.target.value)}
-          value={comment}
-        />
-        <InputRightElement>
-          <Button
-            color="blue.500"
-            cursor="pointer"
-            onClick={handleSubmitComment}
-            isLoading={isCommenting}
-          >
-            Post
-          </Button>
-        </InputRightElement>
-      </InputGroup>
+      {authUser && (
+        <InputGroup>
+          <Input
+            variant="flushed"
+            onChange={(e) => setComment(e.target.value)}
+            value={comment}
+          />
+          <InputRightElement>
+            <Button
+              color="blue.500"
+              cursor="pointer"
+              onClick={handleSubmitComment}
+              isLoading={isCommenting}
+            >
+              Post
+            </Button>
+          </InputRightElement>
+        </InputGroup>
+      )}
     </Flex>
   );
 };

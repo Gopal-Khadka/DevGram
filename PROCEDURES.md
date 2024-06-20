@@ -198,3 +198,5 @@ For home section, we can get dynamic suggested user from the database rather tha
 - Post are also deleted from the profile and the related values are also updated.
 
 ## Create comment functionality
+- Authenticated user can comment on the post of their and other users. 
+- Unauthenticated can only see the posts and the comments.

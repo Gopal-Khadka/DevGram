@@ -51,8 +51,6 @@ const ProfilePost = ({ post }: Props) => {
       await deleteObject(imageRef);
 
       const userRef = doc(firestore, "users", authUser?.uid || "");
-      console.log(userRef);
-
       await updateDoc(userRef, {
         posts: arrayRemove(post?.id),
       });
