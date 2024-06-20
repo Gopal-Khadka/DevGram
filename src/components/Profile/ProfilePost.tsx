@@ -52,12 +52,11 @@ const ProfilePost = ({ post }: Props) => {
 
       const userRef = doc(firestore, "users", authUser?.uid || "");
       console.log(userRef);
-      
+
       await updateDoc(userRef, {
         posts: arrayRemove(post?.id),
       });
       await deleteDoc(doc(firestore, "posts", post.id || ""));
-      
 
       deletePost(post?.id || null);
       deletePostFromProfile(post.id || "");
@@ -163,17 +162,11 @@ const ProfilePost = ({ post }: Props) => {
                 </HStack>
                 <VStack gap={2} overflow="auto" maxH="300px">
                   {post.comments.map((comment, idx) => (
-                    <PostComment
-                      key={idx}
-                      comment={comment}
-                      image={post.imageURL || ""}
-                      time="12h"
-                      username="@amenza"
-                    />
+                    <PostComment key={idx} comment={comment} />
                   ))}
                 </VStack>
                 <Flex mt="auto">
-                  <PostFooter />
+                  <PostFooter post={post} />
                 </Flex>
               </Flex>
             </Flex>

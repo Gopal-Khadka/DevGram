@@ -6,17 +6,33 @@ import {
   InputRightElement,
   Input,
   Box,
+  Button,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { FaRegHeart, FaRegComment, FaHeart } from "react-icons/fa";
+import { Post } from "../../store/postStore";
+import usePostComment from "../../hooks/usePostComment";
 
-const PostFooter = () => {
+interface Props {
+  post: Post;
+}
+
+const PostFooter = ({ post }: Props) => {
   const [isLiked, setIsLiked] = useState(true);
   const [noOfLikes, setNoOfLikes] = useState(1000);
+  const { isCommenting, handlePostComment } = usePostComment();
+  const [comment, setComment] = useState(" ");
 
   const handleLike = () => {
     setIsLiked(!isLiked);
     isLiked ? setNoOfLikes(noOfLikes - 1) : setNoOfLikes(noOfLikes + 1);
+  };
+
+  const handleSubmitComment = async () => {
+    console.log(comment);
+
+    handlePostComment(post.id || "", comment);
+    setComment(" ");
   };
 
   return (
@@ -30,17 +46,24 @@ const PostFooter = () => {
         </Box>
       </Flex>
       <Text>{noOfLikes} likes</Text>
-      <Flex gap={2}>
-        <Text fontWeight="bold">Gopal Khadka</Text>
-        <Text>Looking fine ❤️❤️❤️</Text>
-      </Flex>
       <Link as={Text} color="gray.500" _hover={{ textDecoration: "none" }}>
-        View all {100} comments
+        View all comments
       </Link>
       <InputGroup>
-        <Input variant="flushed" />
-        <InputRightElement color="blue.500" cursor="pointer">
-          Post
+        <Input
+          variant="flushed"
+          onChange={(e) => setComment(e.target.value)}
+          value={comment}
+        />
+        <InputRightElement>
+          <Button
+            color="blue.500"
+            cursor="pointer"
+            onClick={handleSubmitComment}
+            isLoading={isCommenting}
+          >
+            Post
+          </Button>
         </InputRightElement>
       </InputGroup>
     </Flex>

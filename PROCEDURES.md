@@ -196,3 +196,5 @@ For home section, we can get dynamic suggested user from the database rather tha
 ## Delete post functionality
 - When the delete button is clicked on the post overlay, the id of the post is used to delete the post from the firebase database and storage.
 - Post are also deleted from the profile and the related values are also updated.
+
+## Create comment functionality

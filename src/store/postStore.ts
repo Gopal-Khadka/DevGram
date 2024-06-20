@@ -5,9 +5,15 @@ export interface Post {
   imageURL?: string;
   caption: string;
   likes: [];
-  comments: [];
+  comments: Comment[];
   createdAt: number;
   createdBy: string;
+}
+export interface Comment {
+  comment: string;
+  createdAt: number;
+  createdBy: string;
+  postId: string;
 }
 
 interface PostState {
@@ -15,6 +21,7 @@ interface PostState {
   createPost: (post: Post) => void;
   setPosts: (posts: Post[]) => void;
   deletePost: (id: string | null) => void;
+  addComment: (postId: string, newComment: Comment) => void;
 }
 
 const usePostStore = create<PostState>()((set) => ({
@@ -24,7 +31,18 @@ const usePostStore = create<PostState>()((set) => ({
 
   deletePost: (id) =>
     set((state) => ({ posts: state.posts.filter((post) => post.id != id) })),
-  // addComment
+  addComment: (postId, newComment) =>
+    set((state) => ({
+      posts: state.posts?.map((post) => {
+        if (post.id == postId) {
+          return {
+            ...post,
+            comments: [...post.comments, newComment],
+          };
+        }
+        return post;
+      }),
+    })),
 }));
 
 export default usePostStore;
