@@ -169,7 +169,7 @@ const ProfilePost = ({ post }: Props) => {
                   ))}
                 </VStack>
                 <Flex mt="auto">
-                  <PostFooter post={post} />
+                  <PostFooter post={post} creatorProfile={authUser} />
                 </Flex>
               </Flex>
             </Flex>
