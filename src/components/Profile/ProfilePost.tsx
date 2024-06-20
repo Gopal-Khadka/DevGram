@@ -26,6 +26,7 @@ import { deleteObject, ref } from "firebase/storage";
 import { fireStorage, firestore } from "../../firebase/firebase";
 import { arrayRemove, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { useState } from "react";
+import Caption from "./Caption";
 
 interface Props {
   post: Post;
@@ -158,7 +159,11 @@ const ProfilePost = ({ post }: Props) => {
                     </Button>
                   )}
                 </HStack>
+
                 <VStack gap={2} overflow="auto" maxH="300px">
+                  {/* CAPTIONS */}
+                  {post.caption && <Caption post={post} />}
+                  {/* COMMENTS */}
                   {post.comments.map((comment, idx) => (
                     <PostComment key={idx} comment={comment} />
                   ))}

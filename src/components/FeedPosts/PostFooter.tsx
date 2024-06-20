@@ -8,7 +8,7 @@ import {
   Box,
   Button,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { FaRegHeart, FaRegComment, FaHeart } from "react-icons/fa";
 import { Post } from "../../store/postStore";
 import usePostComment from "../../hooks/usePostComment";
@@ -24,6 +24,7 @@ const PostFooter = ({ post }: Props) => {
   const { isCommenting, handlePostComment } = usePostComment();
   const [comment, setComment] = useState(" ");
   const { user: authUser } = useAuthStore();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleLike = () => {
     setIsLiked(!isLiked);
@@ -42,7 +43,7 @@ const PostFooter = ({ post }: Props) => {
           {isLiked ? <FaHeart size={20} /> : <FaRegHeart size={20} />}
         </Box>
         <Box transform="scaleX(-1)">
-          <FaRegComment size={20} />
+          <FaRegComment size={20} onClick={()=>inputRef.current?.focus} />
         </Box>
       </Flex>
       <Text>{noOfLikes} likes</Text>
@@ -55,6 +56,7 @@ const PostFooter = ({ post }: Props) => {
             variant="flushed"
             onChange={(e) => setComment(e.target.value)}
             value={comment}
+            ref={inputRef}
           />
           <InputRightElement>
             <Button

@@ -194,10 +194,14 @@ For home section, we can get dynamic suggested user from the database rather tha
 - The posts sections now use the queried data from the firestore to show the relevant data to the user.
 
 ## Delete post functionality
+
 - When the delete button is clicked on the post overlay, the id of the post is used to delete the post from the firebase database and storage.
 - Post are also deleted from the profile and the related values are also updated.
 
 ## Create comment functionality
-- Authenticated user can comment on the post of their and other users. 
+
+- Authenticated user can comment on the post of their and other users.
 - Unauthenticated can only see the posts and the comments.
 - Time, username, avatar and link to the user profile is also added to the comments section.
+- Input is focused when the comment button is clicked for the post.
+- Caption for the user's post is created (in blue color).

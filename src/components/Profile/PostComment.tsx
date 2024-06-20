@@ -33,7 +33,7 @@ const PostComment = ({ comment }: Props) => {
           <Text noOfLines={2}>{comment.comment}</Text>
         </HStack>
         <Text color="gray.500" alignSelf="flex-start">
-          {timeAgo(comment.createdAt)} ago
+          {timeAgo(comment.createdAt)}
         </Text>
       </VStack>
     </HStack>
