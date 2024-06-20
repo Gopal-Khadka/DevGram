@@ -205,3 +205,9 @@ For home section, we can get dynamic suggested user from the database rather tha
 - Time, username, avatar and link to the user profile is also added to the comments section.
 - Input is focused when the comment button is clicked for the post.
 - Caption for the user's post is created (in blue color).
+
+## Like and Unlike Functionality
+
+- You can like and dislike the post where your `uid` will be stored in the database.
+
+This marks the end of our project. At least for now!!!
