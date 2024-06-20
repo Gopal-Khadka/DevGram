@@ -2,22 +2,16 @@ import { VStack } from "@chakra-ui/react";
 import PostHeader from "./PostHeader";
 import PostBody from "./PostBody";
 import PostFooter from "./PostFooter";
-import { useEffect, useState } from "react";
 import SkeletonFeed from "./SkeletonFeed";
+import { Post } from "../../store/postStore";
+import useGetUserProfileById from "../../hooks/useGetUserProfileById";
 
 interface Props {
-  avatar: string;
-  username: string;
-  image: string;
+  post: Post;
 }
 
-const FeedPost = ({ avatar, username, image }: Props) => {
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
-  }, []);
+const FeedPost = ({ post }: Props) => {
+  const { userProfile, isLoading } = useGetUserProfileById(post.createdBy);
 
   return (
     <>
@@ -25,9 +19,9 @@ const FeedPost = ({ avatar, username, image }: Props) => {
         <SkeletonFeed />
       ) : (
         <VStack mb={12} fontSize={{ base: 13.5, md: 15, lg: 17 }}>
-          <PostHeader avatar={avatar} username={username} />
-          <PostBody image={image} />
-          <PostFooter />
+          <PostHeader post={post} userProfile={userProfile} />
+          <PostBody image={post.imageURL || ""} />
+          <PostFooter post={post} />
         </VStack>
       )}
     </>

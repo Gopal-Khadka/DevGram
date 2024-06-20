@@ -88,10 +88,6 @@ const ProfileHeader = () => {
           </Flex>
         </HStack>
         <Text fontWeight="bold"> {userProfile?.bio}</Text>
-        <Text noOfLines={[2, 3]}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores
-          earum, quos
-        </Text>
       </Flex>
 
       {isOpen && <EditProfile isOpen={isOpen} onClose={onClose} />}

@@ -24,7 +24,7 @@ const PostFooter = ({ post }: Props) => {
   const [comment, setComment] = useState(" ");
   const { user: authUser } = useAuthStore();
   const inputRef = useRef<HTMLInputElement>(null);
-  const { likes, isLiked, handleLikePost, isUpdating } = useLikePost(post);
+  const { likes, isLiked, handleLikePost } = useLikePost(post);
 
   const handleSubmitComment = async () => {
     handlePostComment(post.id || "", comment);
@@ -34,16 +34,11 @@ const PostFooter = ({ post }: Props) => {
   return (
     <Flex w="full" px={2} mt={2} direction="column" gap={2}>
       <Flex gap={4}>
-        <Button
-          onClick={handleLikePost}
-          _hover={{ bg: "none" }}
-          bg={"none"}
-          isDisabled={isUpdating}
-        >
+        <Box onClick={handleLikePost}>
           {isLiked ? <FaHeart size={20} /> : <FaRegHeart size={20} />}
-        </Button>
+        </Box>
         <Box transform="scaleX(-1)">
-          <FaRegComment size={20} onClick={() => inputRef.current?.focus} />
+          <FaRegComment size={20} onClick={() => inputRef.current?.focus()} />
         </Box>
       </Flex>
       <Text>{likes} likes</Text>
