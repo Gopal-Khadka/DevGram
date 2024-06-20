@@ -21,7 +21,7 @@ const FeedPost = ({ post }: Props) => {
         <VStack mb={12} fontSize={{ base: 13.5, md: 15, lg: 17 }}>
           <PostHeader post={post} userProfile={userProfile} />
           <PostBody image={post.imageURL || ""} />
-          <PostFooter post={post} />
+          <PostFooter post={post} creatorProfile={userProfile} />
         </VStack>
       )}
     </>

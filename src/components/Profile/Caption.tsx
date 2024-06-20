@@ -11,7 +11,7 @@ interface Props {
 const Caption = ({ post }: Props) => {
   const { userProfile } = useUserProfileStore();
   return (
-    <HStack gap={2} w="full" color={"blue.400"}>
+    <HStack gap={2} w="full" color={"blue.400"} mb={5}>
       <Link to={`/user/${userProfile?.username}`}>
         <Avatar src={userProfile?.profilePicUrl} name={userProfile?.fullName} />
       </Link>

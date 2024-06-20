@@ -14,17 +14,23 @@ import { Post } from "../../store/postStore";
 import usePostComment from "../../hooks/usePostComment";
 import useAuthStore from "../../store/authStore";
 import useLikePost from "../../hooks/useLikePost";
+import { UserDoc } from "../../hooks/UseSignUpWithEmailAndPass";
+import useUserProfileStore from "../../store/userProfileStore";
+import { timeAgo } from "../../utils/timeago";
 
 interface Props {
   post: Post;
+  creatorProfile: UserDoc | null;
 }
 
-const PostFooter = ({ post }: Props) => {
+const PostFooter = ({ post, creatorProfile }: Props) => {
   const { isCommenting, handlePostComment } = usePostComment();
   const [comment, setComment] = useState(" ");
   const { user: authUser } = useAuthStore();
+  const { userProfile } = useUserProfileStore();
   const inputRef = useRef<HTMLInputElement>(null);
   const { likes, isLiked, handleLikePost } = useLikePost(post);
+  const isProfilePage = authUser?.uid == userProfile?.uid;
 
   const handleSubmitComment = async () => {
     handlePostComment(post.id || "", comment);
@@ -42,9 +48,32 @@ const PostFooter = ({ post }: Props) => {
         </Box>
       </Flex>
       <Text>{likes} likes</Text>
-      <Link as={Text} color="gray.500" _hover={{ textDecoration: "none" }}>
-        View all comments
-      </Link>
+
+      {!isProfilePage && (
+        <>
+          <Text fontSize={"sm"} fontWeight={"700"}>
+            {creatorProfile?.username}
+            <Text as={"span"} fontWeight={"400"}>
+              {" "}
+              {post.caption}
+            </Text>
+          </Text>
+          {post.comments.length > 0 && (
+            <Link
+              as={Text}
+              color="gray.500"
+              _hover={{ textDecoration: "none" }}
+            >
+              View all {post.comments.length} comments
+            </Link>
+          )}
+        </>
+      )}
+      {isProfilePage && (
+        <Text fontSize={"12"} color={"gray"}>
+          Posted {timeAgo(post.createdAt)}
+        </Text>
+      )}
       {authUser && (
         <InputGroup paddingY={2}>
           <Input
