@@ -1,15 +1,26 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import AuthPage from "./pages/AuthPage";
 import ProfilePage from "./pages/Profile";
 import PageLayout from "./layouts/PageLayout";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { fireAuth } from "./firebase/firebase";
+import Search from "./components/SideBar/Search";
 
 const App = () => {
+  const [authUser] = useAuthState(fireAuth); // know if the user is logged in or not from the firebase
   return (
     <PageLayout>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/auth" element={<AuthPage />} />
+        <Route
+          path="/"
+          element={authUser ? <HomePage /> : <Navigate to="/auth" />}
+        />
+        <Route
+          path="/auth"
+          element={!authUser ? <AuthPage /> : <Navigate to="/" />}
+        />
+        <Route path="/search" element={<Search />} />
         <Route path="/user/:username" element={<ProfilePage />} />
       </Routes>
     </PageLayout>

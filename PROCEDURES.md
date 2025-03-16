@@ -93,3 +93,123 @@ npm i firebase react-firebase-hooks
 ### Step 8: Setup Firebase Storage for your project
 
 ### Step 9: Setup Firestore DB for your project
+
+## Implementing Login and SignUp Functionality
+
+We are creating separate components for both login and signup form. This way, we can handle their functionality separately.
+
+### SignUp With Email
+
+Gooogle Firebase Authentication service is used to handle the signup functionality by email. When the user tries to create a new account, it verifies if the user is actually new i.e the user doesn't already exist on the database. After verification, the user is created and the necessary details are stored on `firestore` and localStorage.
+
+### Logout Functionality from SideBar
+
+Similar to implemenatation of user login functionality, we can implement user signout functionality using `react-firebase-hooks`. If user is logged out, the data from local storage will be removed.
+
+### Restricting User After LogOut
+
+After the user is logged out, we need to restrict the homepage access to the user. For this, we need global state management library `zustand`. First, we need to install it.
+
+```bash
+    npm i zustand
+```
+
+- We use zustand `create()` function to create a global store which store the `user` related state and can be accessed from anywhere. When the user uses website, it is checked if the the local storage item has `user-info` item.If it exists, `user` state is assigned that value.
+- Whenever the user is signed in, `user` state in zustand will be assigned a `User` object and when user logs out, `user` state becomes null. Similar is done for the `login` and `logout` functionality.
+- If there is, the user is redirected to homepage even if the user tries to open the authentication page. Otherwise, the user is redirected to authentication page even if the user tries to open the home page.
+- For the profile page, anyone can access it but only user can interact on it.
+- If the user is not signed in, the sidebar will not be shown.
+- Alternatively, a NavBar needs to be shown to prompt user to login or sign up.
+
+### Showing NavBar to Signed Out Users
+
+When the user is logged out on the profile page, they are prompted to sign up or log in. The form will be shown based on which button they click. If they click signup page, they will be shown SignUp Form. Else, they will be shown the Login Form.
+
+### Adding Page Spinner
+
+If the user has slow internet connection during authentication, the page is gonna show a spinner while the authentication is being done in the background.
+
+### Fixing A Possible SignUp Issue
+
+While signing up the user, we check if the email and password already exists. What if the user tries to take the existing username? There are no checks for that. Not yet !  
+We are going to run a query on the `firestore` DB tp check if the username already exists. If it does, a toast will be thrown to the user.Else, user will be logged in.
+
+### Handling Email Login Functionality
+
+Similar to signing up, the login functionality is implemented with ease.
+
+### Handling Google and GitHub Authentication
+
+Google and GitHub authentication is handled based on the chosen provider. The one thing to be considered here is:
+
+- If user is logged in for the first time
+  For this, new user document need to be created in the firestore `users` collection.
+- Otherwise, user has logged in before.
+  For this, no new user document need to be created in the firestore `users` collection.
+
+For checking the condition, a query on the firestore is run to check if the user already exists . If user is already created before, the retrieved data can be stored in the local storage and authStore in zustand similar to signIn and LogIn functionality.
+
+### Fetching Profile Header Data
+
+If the user is found on the `users` collection, their information will be shown to the user instead of random values and data. `ProfileStore` is created using zustand to keep track of the searched user or selected user profile. This way, our media app is going to be dynamic and reactive in nature.
+
+## Edit User Profile
+
+- Case I : User not logged in
+  No button will be shown to the user in the header section.
+- Case II: User logged and visiting own profile
+  If logged user is visiting own profile, button `Edit Profile` is shown.
+- Case III: User logged in but visiting somebody else's profile
+  If logged user is visiting somebody else's profile, button `Follow / Unfollow` is shown.
+
+### Edit Profile Functionality
+
+1. Create a modal behaviour on the click of the `Edit Profile` button.  
+   A profile edit modal should open up when the button is clicked which enables the user to edit their profile pic, username, full name and bio. On top of that, we can enable user to change their email and password using hooks defined in `react-firebase-hooks` library.
+2. Edit Profile picture  
+   The profile picture must be of type `image`. It can be jpeg, png or any other image formats. Its size must be less than 2MB which I think is enough for a profile picture. When button is clicked, a file select dialog is opened which urges user to upload the new image for profile picture.
+3. Changing the data on the firestore  
+   All the changes that we made till now will only be reflected on the user interface but not on the actual server. Now we need to handle this by creating a hook.  
+   This can be done by uploading image to the firestore storage and updating the user data using `uid` in `users` collection. Localstorage and `userProfile` state store from zustand needs to be updated for new user data. The changes made on the server needs to be reflected on UI dependent on the server data.
+
+## Follow/ Unfollow Functionality
+
+- Let's first understand the logic here. Here are two parties being involved in this: `follower` and `followed`. So the changes need to be reflected on both parties on both server and UI. First, we need to check if the user is already being followed or not. This can be done either by querying in firestore DB or checking the required data value from `authUser` state from `AuthStore`.
+- After it is checked, we need to decide if the userId(uid) needs to be added or removed from the respective user collection. After the updation is done in the server, we need to requery the firebase DB for updated `authUser` and `userToFollowOrUnfollow` which can be then stored in `authUser` and `userProfile` store state to reflect the changes in UI.
+- You can also update `localStorage` for consistency.
+
+## Search Functionality
+
+When search section is clicked on the sidebar, it opens up a modal asking for a username. If user exists, it show a small component as like `Suggested user` which allows user to follow and unfollow the searched user. We can even open up the searched user profile.
+
+## Dynamic Suggested Users
+
+For home section, we can get dynamic suggested user from the database rather than using the fixed user data. We will create a hook to do that for us. We will only suggest the users that we have not followed and we have limited no of the users to be suggested to be `3`.
+
+## Create Post Functionality
+
+- Create Post Create Modal on the `Create Post` section click on the `SideBar`.
+- Update the post data both on server and UI.
+  Changes need to be reflected on `users` and `posts` collection on the firestore database. Similarly, `userProfile` and `postStore` need to be updated accordingly which immediately reflect changes on the UI.
+- The posts sections now use the queried data from the firestore to show the relevant data to the user.
+
+## Delete post functionality
+
+- When the delete button is clicked on the post overlay, the id of the post is used to delete the post from the firebase database and storage.
+- Post are also deleted from the profile and the related values are also updated.
+
+## Create comment functionality
+
+- Authenticated user can comment on the post of their and other users.
+- Unauthenticated can only see the posts and the comments.
+- Time, username, avatar and link to the user profile is also added to the comments section.
+- Input is focused when the comment button is clicked for the post.
+- Caption for the user's post is created (in blue color).
+
+## Like and Unlike Functionality
+- You can like and dislike the post where your `uid` will be stored in the database.
+
+## Fetch all comments
+- All the comments are fecthed and the experience in the homepage is enhanced.
+
+This marks the end of our project. At least for now!!!

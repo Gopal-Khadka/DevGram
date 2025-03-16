@@ -2,7 +2,7 @@ import { Box, Flex } from "@chakra-ui/react";
 import SideBarLogo from "./SideBarLogo";
 import SideBarItems from "./SideBarItems";
 
-const index = () => (
+const Index = () => (
   <Box
     height="100vh"
     borderRight="1px solid"
@@ -27,4 +27,4 @@ const index = () => (
   </Box>
 );
 
-export default index;
+export default Index;

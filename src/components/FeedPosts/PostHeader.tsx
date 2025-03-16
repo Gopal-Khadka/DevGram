@@ -1,18 +1,31 @@
-import { Avatar, Box, Flex, Text } from "@chakra-ui/react";
+import { Avatar, Box, Button, Flex, Text } from "@chakra-ui/react";
+import { Post } from "../../store/postStore";
+import { UserDoc } from "../../hooks/UseSignUpWithEmailAndPass";
+import { timeAgo } from "../../utils/timeago";
+import { Link } from "react-router-dom";
+import useFollowUser from "../../hooks/useFollowUser";
 
 interface Props {
-  avatar: string;
-  username: string;
+  post: Post;
+  userProfile: UserDoc | null;
 }
 
-const PostHeader = ({ avatar, username }: Props) => {
+const PostHeader = ({ post, userProfile }: Props) => {
+  const { handleFollowUser, isFollowing, isUpdating } = useFollowUser(
+    post.createdBy
+  );
+
   return (
     <Flex justifyContent="space-between" alignItems="center" w="full">
       <Flex alignItems="center" gap={2}>
-        <Avatar src={avatar} size="sm" />
+        <Link to={`/user/${userProfile?.username}`}>
+          <Avatar src={userProfile?.profilePicUrl} size="sm" />
+        </Link>
         <Flex fontWeight="bold" gap={2}>
-          <Text>{username}</Text>
-          <Text color="gray.500"> 1w</Text>
+          <Link to={`/user/${userProfile?.username}`}>
+            <Text>{userProfile?.username}</Text>
+          </Link>
+          <Text color="gray.500"> {timeAgo(post.createdAt)}</Text>
         </Flex>
       </Flex>
       <Box
@@ -22,7 +35,9 @@ const PostHeader = ({ avatar, username }: Props) => {
         _hover={{ color: "white" }}
         transition="0.2s ease-in-out"
       >
-        <Text>Unfollow</Text>
+        <Button onClick={handleFollowUser} isLoading={isUpdating}>
+          {isFollowing ? "Unfollow" : "Follow"}
+        </Button>
       </Box>
     </Flex>
   );

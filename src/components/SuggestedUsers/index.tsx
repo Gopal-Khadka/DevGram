@@ -1,28 +1,21 @@
 import SuggestedUser from "./SuggestedUser";
-import { VStack, Text, Link, Flex, Box } from "@chakra-ui/react";
+import { VStack, Text, Link, Flex, Box, Spinner } from "@chakra-ui/react";
+import useGetSuggestedUsers from "../../hooks/useGetSuggestedUsers";
 
 const index = () => {
+  const { isLoading, suggestedUsers } = useGetSuggestedUsers();
   return (
     <VStack>
-      <Flex justifyContent="space-between" w="full">
-        <Text color={"gray"}>Suggested for you</Text>
-        <Link> See All</Link>
-      </Flex>
-      <SuggestedUser
-        src="/images/img1.png"
-        name="Sai Pallavi"
-        followers="1669"
-      />
-      <SuggestedUser
-        src="/images/img2.png"
-        name="Gopal Khadka"
-        followers="648"
-      />
-      <SuggestedUser
-        src="/images/img3.png"
-        name="Marilyn Munroe"
-        followers="689"
-      />
+      {suggestedUsers.length > 0 && (
+        <Flex justifyContent="space-between" w="full">
+          <Text color={"gray"}>Suggested for you</Text>
+          <Link> See All</Link>
+        </Flex>
+      )}
+      {isLoading && <Spinner size={"xl"} />}
+      {suggestedUsers.map((user) => (
+        <SuggestedUser user={user} key={user.id} />
+      ))}
       <Box>
         <Text>
           &copy; {new Date().getFullYear()} Built By

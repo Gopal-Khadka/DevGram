@@ -1,29 +1,23 @@
-import { Container } from "@chakra-ui/react";
+import { Container, Text } from "@chakra-ui/react";
 import FeedPost from "./FeedPost";
+import useGetFeedPosts from "../../hooks/useGetFeedPosts";
 
 const index = () => {
+  const { isLoading, posts } = useGetFeedPosts();
+
   return (
     <Container maxW="container.sm" py={10} px={2}>
-      <FeedPost
-        avatar="/images/img1.png"
-        image="/images/img1.png"
-        username="@bahdur"
-      />
-      <FeedPost
-        avatar="/images/img2.png"
-        image="/images/img2.png"
-        username="@laura"
-      />
-      <FeedPost
-        avatar="/images/img3.png"
-        image="/images/img3.png"
-        username="@simons"
-      />
-      <FeedPost
-        avatar="/images/img4.jpg"
-        image="/images/img4.jpg"
-        username="@jagdip"
-      />
+      {!isLoading &&
+        posts.length > 0 &&
+        posts.map((post) => <FeedPost key={post.id} post={post}></FeedPost>)}
+      {!isLoading && posts.length == 0 && (
+        <>
+          <Text fontSize={"md"} color={"red.400"}>
+            Dayuum. Looks like you don&apos;t have any friends with posts.
+          </Text>
+          <Text color={"red.400"}>Stop coding and go make some!!</Text>
+        </>
+      )}
     </Container>
   );
 };
